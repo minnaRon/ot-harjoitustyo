@@ -1,5 +1,5 @@
 .....................................................................
-2 ylimääräistä, kun tarkistin mitä nimenmuutoksessa tapahtuu..
+2 ylimääräistä committia, kun tarkistin mitä nimenmuutoksessa tapahtuu..
 commit a9067095549da30fc5171d31a4545d53a1a7a0ff
 Author: Minna Ronka <minna.ronka@gmail.com>
 Date:   Tue Mar 15 10:49:34 2022 +0200
