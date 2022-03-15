@@ -1,0 +1,137 @@
+.....................................................................
+2 ylimääräistä, kun tarkistin mitä nimenmuutoksessa tapahtuu..
+commit a9067095549da30fc5171d31a4545d53a1a7a0ff
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 10:49:34 2022 +0200
+
+    Poisto tsekki1 ja nimenmuutos tsekki2
+
+ tiedostoja/file_tsekki1  | 0
+ tiedostoja/file_tsekki2  | 0
+ tiedostoja/file_tsekki22 | 1 +
+ 3 files changed, 1 insertion(+)
+
+commit 7b0fd63c1f81ffbe05192c9252ff6a237749f933
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 10:44:18 2022 +0200
+
+    Lisää tiedostoja poistoa ja nimenmuutosta varten (ylimääräinen)
+
+ tiedostoja/file_tsekki1 | 0
+ tiedostoja/file_tsekki2 | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+.....................................................................
+commit 5ed6f1c4232e467e4a5998eae5233e2946bcdcbb
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 10:37:22 2022 +0200
+
+    Poisto file1 ja uudelleennimeäminen file2 -> file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit da95378ab1da0b607c211b5f5c74c995691fda6c
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 09:43:47 2022 +0200
+
+    Lisää tiedostoja sisältävä tiedostoja -hakemisto
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit e041611cd138803a411e815b3c2963e1dc34f414
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 09:25:32 2022 +0200
+
+    Lisää ja poista tekstiä
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 592417ab1434380ab32ff7451e429f22bd167ccb
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 09:19:39 2022 +0200
+
+    Uudelleennimeä tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit f4d2d3c5c91a0b09dbbcc2cf4076f1e9537f9f5d
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 09:13:07 2022 +0200
+
+    Poista toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 3a1c7c6e04638c5a47036537ede7351f3c196267
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 09:07:52 2022 +0200
+
+    Lisää ja poista tekstiä
+
+ tiedosto.txt | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 6e3821c0ee53fb60ae80d875c8a06803c7bec94b
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 09:04:38 2022 +0200
+
+    Lisää tekstiä
+
+ tiedosto.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit d572bfe71a6a882f416a4d1848b6bdd9a442e8e4
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 08:47:12 2022 +0200
+
+    Lisätty stuff
+
+ stuff/jokin_tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e44f4c99b56edc9fddb7542da9f33e7088973953
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 08:44:15 2022 +0200
+
+    Muutoksia toiseen ja kolmanteen
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 1df222192cea101338d27f2c6f7d1bcbf35f71ea
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 08:41:19 2022 +0200
+
+    Luotu kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 3a7bc9bf45baf30467a1c64d755d5adb79b2b9c0
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 08:34:55 2022 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 22e2d9683291bc10799349be224008f8f084b6a2
+Author: Minna Ronka <minna.ronka@gmail.com>
+Date:   Tue Mar 15 08:21:36 2022 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ 
