@@ -1,0 +1,227 @@
+access control;pääsynvalvonta
+access control list;pääsyoikeuslista
+access matrix;pääsymatriisi
+addressin mode;tiedonosoitusmoodi
+adware;mainostaja
+affinity;kiintymys, affiniteetti
+application binary interface, ABI;sovellusten binäärikäyttöliittymä
+application programming interface, API;sovellusohjelmoinnin käyttöliittymä
+associative mapping;assosiatiivinen kuvaus
+atomic;atominen, jakamaton
+auditing function;auditointijärjestelmä
+authenticity;oikeellisuus
+autorooter;etäkäyttöohjelma
+availability;saatavuus (tietoturva)
+backdoor;takaovi, salaovi (tietoturva)
+barrier;puomi
+basic file system, physical I/O system;fyysinen tiedostojärjestelmä
+batch multiprogramming;eräajo
+baton passing;viestikapulan välitys tai antaminen
+binding;sidonta
+block size;lohkon koko, (välimuistin) rivin koko
+bot;piilo-ohjelma, botti (sanasta robotti)
+broker;välittäjä, meklari
+buddy;vieruskaveri, kaveri
+busy wait, spinlock;loopissa odotus (aktiivisena)
+B-tree;B-puu, balansoitu puu
+capability, capability ticket;valtakirja, pääsylippu
+cache;välimuisti
+chained allocation;ketjutetut (levylohkot)
+channel;kanava
+circular wait;kehäodotus
+clandestine user;salainen käyttäjä
+client-server;asiakas-palvelin
+cluster;klusteri
+condition variable;ehtomuuttuja
+confidentiality;luottamuksellisuus (tietoturva)
+contiquous file allocation;yhtenäisten levylohkojen alue
+compaction;tiivistys
+consolidation;tiivistys, yhdistely
+critical section;kriittinen alue, kriittinenvaihe
+daemon process;daemon prosessi
+data availability;tiedon saatavuus
+data integrity;tiedon muuttumattomuus
+data trespass;tietomurto
+deadlock;lukkiutuminen, lukkiutuma
+deadlock avoidance;lukkiutumisen välttäminen (dynaamisesti)
+deadlock detection and breaking;lukkiutumisen havaitseminen ja murtaminen
+deadlock prevention;lukkiutumisen estäminen (ennakolta)
+deception;petollisuus
+dedicated;omassa käytössä, dedikoitu
+demand paging;tarvesivutus
+determinism;deterministisyys, ennustettavuus
+direct mapping;suora kuvaus
+direct memory access, dma;dma I/O
+disk buffer (in device controller);levypuskuri (laiteohjaimella)
+disk cache (in main memory);levyvälimuisti (keskusmuistissa)
+dispatcher, scheduler;vuoronantaja, skeduloija
+disruption;häirintä (tietoturva)
+distributed operating system (OS);hajautettu käyttöjärjestelmä (KJ)
+downloader;asennuspaketti (tietoturva)
+efficiency;tehokkuus
+embedded system;sulautettu järjestelmä
+enterprise system;yritysjärjestelmä
+event flag;tapahtumalipuke
+execution mode;suoritustila
+execution mode switching;suoritustilan vaihtaminen
+exception;poikkeus
+exploit;haavoittuvuutta hyödyntävä koodi (tietoturva)
+exposure;altistus
+external fragmentation;ulkoinen pirstoutuminen (varatun alueen ulkop.)
+fair, fairness;reilu, reiluus
+fault, interrupt;poikkeus, keskeytys
+fault tolerant;vikasietoinen
+fetch-execute cycle;(käskyjen) nouto- ja suoritussykli
+fetch policy;noutopolitiikka
+field;kenttä
+file cache;tiedostovälimuisti
+file system;tiedostojärjestelmä
+firewall;palomuuri
+flooder;tietoliikennetulvan aiheuttaja
+fragmentation;pirstoutuminen
+frame;kehys, sivukehys
+frame locking;kehyksen (sisällön) lukitseminen
+gang scheduling;joukkoskedulointi, ryhmäskedulointi
+group associative mapping;joukkoassosiatiivinen kuvaus
+hard link;suora linkki
+hashed;hajautettu, hajasaanti
+high level language, HLL;korkean tason kieli
+indexed sequential (file system organ.);indeksoitu sarjallinen
+interception;salakuuntelu
+inference;päättely
+integrity;koskemattomuus (tietoturva)
+internal fragmentation;sisäinen pirstoutuminen (varatun alueen sisällä)
+interrupt, fault;keskeytys, poikkeus
+interrupt-driven I/O; tarkista tämä.. epäsuora I/O, keskeyttävä I/O
+interrupt handler;keskeytyskäsittelijä
+intrusion;tunkeutuminen
+instruction set architecture, ISA;käskykanta-arkkitehtuuri
+intruder;hyökkääjä (tietoturva)
+inverted page table;käänteinen sivutaulu
+I/O bound;I/O sidonnainen (prosessi)
+I/O supervisor;I/O:n hallintajärjestelmä
+jacketing;kuori, päällys, päällystakki
+journaling file system;journaloiva tiedostojärjestelmä
+kernel mode, privileged mode, system mode;etuoikeutettu tila, ytimen tila
+kernel thread;KJ-tason säie, ytimen säie (KJ skeduloi)
+keylogger;näppäimistön kaappari
+literal;literaali, vakio
+livelock;elolukko
+load control;moniajoasteen säätely
+load sharing;kuorman tasaus
+locality;paikallisuus
+logic bomb;logiikkapommi (tietoturva)
+mailbox;postilaatikko
+malicious software;pahantahtoinen ohjelma/koodi
+malware;haittaohjelma
+mapping function;kuvausfunktio
+masquerader;luvaton käyttäjä
+memory hierarchy;muistihierarkia
+microkernel architecture;mikroydin arkkitehtuuri
+middleware;väliohjelmisto
+migrate;muuttaa
+misfeasor;luvattomasti käyttäminen
+missapropriation;(vallan) anastus
+mobile code;siirrettävä koodi
+monitor;monitori
+multicore;moniytiminen
+multithreaded, multithreading;monisäikeinen, monisäikeisyys
+mutual exclusion;poissulkeva, yhdellä käyttäjällä
+mutual exclusion problem;poissulkemisongelma
+nondeterministic;epädeterministinen
+nonpreemptive;ei keskeyttävä
+object request broker (ORB);palvelupyynnön välittäjä
+overlay;kerrostus
+paging;sivutus
+parallelized application;rinnakkaistettu sovellus
+parallelizing compiler;rinnakkaistava kääntäjä
+parameter marshalling;parametrien esitystavan muunnos
+parametric computing;parametrisoitu laskenta
+partitioning;ositus, partitiointi
+pile (file system organ.);läjä, erikokoiset peräkkäistietueet
+placement (policy);sijoitus (politiikka)
+postprotocol;jälkiprotokolla
+preemptive;keskeyttävä
+predictability;ennustettavuus
+preprotocol;esiprotokolla
+priority ceiling;kattoprioriteetti
+priority inheritance;prioriteetin periminen
+priority inversion;prioriteetin kääntyminen
+privileged mode, kernel mode, system mode;etuoikeutettu tila, ytimen tila
+processor bound;suoritin sidonnainen (prosessi)
+processor context, processor state information;suoritinympäristö, suorittimen tilatieto
+process control block (PCB);prosessin kuvaaja, kontrollilohko
+process identification (pid);prosessin tunniste
+process switch, scheduling;prosessin vaihto, skedulointi, vuoronanto
+programmed I/O;suora I/O
+protection;suojaus
+qualitative;laadullinen
+quanta, time slice;aikaviipale
+quantitative;määrällinen
+race condition;kilpailutilanne
+RAM, random access memory;keskusmuisto
+real time;realiaika
+record;tietue
+reentrant;vapaakäyntinen
+relocation;uudelleensijoitus
+rendezvous;kohtaaminen, rendezvous
+replacement algorithm, policy;poistoalgoritmi, -politiikka
+repudiate;kiistää
+resident set, resident set size;käyttöjoukko, käyttöjoukon koko
+response time;vasteaika
+responsiveness;herkästi reagoiva
+rootkit;admin-oikeuksien hankintatyökalu
+round robin;vuorotellen
+round robin scheduling;aikaviipalevuoronanto
+scenario;skenaario
+scheduler, dispatcher;vuoronantaja, skeduloija
+scheduling, process switch;prosessin vaihto, skedulointi, vuoronanto
+security policy;suojauspolitiikka
+security administrator;suojausyksikkö
+segment;segmentti
+semaphore;semafori
+sequential (file system organ.);sarjallinen
+service broker;palvelun välittäjä
+service-oriented architecture (SOA);palveluperustainen arkkitehtuuri
+sharing;yhteiskäyttö (EI jakaminen)
+signalling semantics;signalointisemantiikka
+SOA model;palveluperustaisen arkkitehtuurin malli
+soft link;symbolinen linkki
+spammer;massapostittaja (tietoturva)
+spatial locality;alueellinen paikallisuus
+spinlock, busy wait;loopissa odotus (aktiivisena)
+spyware;vakoiluohjelma
+stealth;näkymätön, näkömättömyys
+starvation;nääntyminen, nälkiintyminen
+supervisor call;käyttöjärjestelmän palvelupyyntö
+synchronization;synkronointi
+symmetric multiprocessor, SMP;symmetrinen moniprosessorikone
+system mode, privileged mode, kernel mode;etuoikeutettu tila, ytimen tila
+thread;säie
+thread context;säikeen suoritusympäristö
+throughput;läpimenovuo, läpimenotiheys
+time sharing;osituskäyttö
+time slice, quanta;aikaviipale
+time slice interrupt;aikaviipalekeskeytys
+temporal locality;ajallinen paikallisuus
+token;kolikko, lupalappu
+transaction processing/system;tapahtumankäsittely
+translation lookaside buffer (TLB);TLB, osoitteenmuunnospuskuri
+trap;trappi, keskeytys, poikkeus
+trap door;takaovi, salaovi (tietoturva)
+trojan horse;troijalainen (tietoturva)
+turnaround time;vastausaika
+user mode, user state;käyttäjätila
+user-level thread;käyttäjätason säie (ei näy KJ:lle)
+usurpation;tunkeutuminen
+utilization;käyttösuhde, utilisaatio
+virtual memory;virtuaalimuisti
+virus;virus
+volume;taltio, volyymi
+worm;mato (tietoturva)
+write policy;kirjoituspolitiikka
+write back;lopuksikirjoittava (välimuisti)
+write through;läpikirjoittava (välimusti)
+zero-day vulnerability;nollapäivän aukko, tietoturva-aukko joka tulee julki vasta hyökkäyspäivänä
+zombie;piilo-ohjelma
+  	 
