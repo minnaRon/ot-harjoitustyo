@@ -10,27 +10,25 @@ Sovelluksen sujuvan toiminnan kannalta Python -version tulisi olla vähintään 
 
 ## Dokumentaatio
 
-- *käyttöohje tähän*
-
 [vaatimusmäärittely](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [työaikakirjanpito](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
-- *changelog tähän*
+[changelog](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
 ## Asennus
 
 1. Asenna riippuvuudet komennolla:
 
-'''bash
+```bash
 poetry install
-'''
+```
 
 2. Käynnistä sovellus komennolla:
 
-'''bash
+```bash
 poetry run invoke start
-'''
+```
 
 ## Komentorivitoiminnot
 
@@ -38,24 +36,24 @@ poetry run invoke start
 
 Aloita ohjelman suoritus komennolla:
 
-'''bash
+```bash
 poetry run invoke start
-'''
+```
 
 ### Testaus
 
 Aloita testaus komennolla:
 
-'''bash
+```bash
 poetry run invoke test
-'''
+```
 
 ### Testikattavuus
 
 Testikattavuusraportin saa tuotettua komennolla:
 
-'''bash
+```bash
 poetry run invoke coverage-report
-'''
+```
 
-Raportti löytyy hakemistosta htmlcov.
+Raportti löytyy htmlcov -hakemistosta.
