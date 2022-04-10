@@ -136,12 +136,12 @@ class PractiseView:
         word_button4.grid(row=5, column=0)
         word_button5.grid(row=6, column=0)
 
-        word_button6.grid(row=2, column=1)
-        word_button7.grid(row=3, column=1)
-        word_button8.grid(row=4, column=1)
-        word_button9.grid(row=5, column=1)
-        word_button10.grid(row=6, column=1)
+        word_button6.grid(row=2, column=2, sticky='w')
+        word_button7.grid(row=3, column=2, sticky='w')
+        word_button8.grid(row=4, column=2, sticky='w')
+        word_button9.grid(row=5, column=2, sticky='w')
+        word_button10.grid(row=6, column=2, sticky='w')
 
-        self._response_label.grid(row=7, column=0)   
+        self._response_label.grid(row=7, column=0)
 
         self._hide_response()
