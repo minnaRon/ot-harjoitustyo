@@ -2,7 +2,7 @@
 
 ## Sanastotreeni
 
-Sovellus tulee olemaan tarkoitettu vieraskielisen sanaston harjoitteluun. Tällä hetkellä alkua harjoittelunäkymästä ja sen toiminnallisuudesta testailtavissa, myös omia sanoja on mahdollista lisätä sanojen lisäysnäkymässä. Sanat tallentuvat omalla koneella SQLite -tietokantaan.
+Sovellus tulee olemaan tarkoitettu vieraskielisen sanaston harjoitteluun. Tällä hetkellä alkua harjoittelunäkymästä ja sen toiminnallisuudesta testailtavissa. Tietokannan sanasto on [Teemu Kerolan keräämää operating systems -sanastoa](https://www.cs.helsinki.fi/group/nodes/kurssit/kj/sanasto.html), myös omia sanoja on mahdollista lisätä sanojenlisäysnäkymässä. Sanat tallentuvat omalla koneella SQLite -tietokantaan.
 
 ## Python -versio
 
@@ -12,7 +12,7 @@ Sovelluksen sujuvan toiminnan kannalta Python -version tulisi olla vähintään 
 
 [vaatimusmäärittely](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-*tähän arkkitehtuurikuvauslinkki*
+[arkkitehtuurikuvaus](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
 [työaikakirjanpito](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
