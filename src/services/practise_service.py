@@ -1,7 +1,12 @@
 from random import shuffle
+from repositories.practise_repository import (
+    practise_repository as default_practise_repository
+)
+
 
 class PractiseService:
-    def __init__(self):
+    def __init__(self, practise_repository=default_practise_repository):
+        self.practise_repository = practise_repository
         self._words_chosen_to_practise = None
         self._indexes_buttons_word_orig = None
         self._indexes_buttons_word_transl = None
@@ -47,16 +52,10 @@ class PractiseService:
                              kirjautuneena saat kaikki sovelluksen ominaisuudet
                               käyttöösi.'''
 
-    #sanat kovakoodattu kunnes tietokanta mukana
     def _set_words_to_practise(self, lang_orig, lang_transl):
-        self._words_chosen_to_practise = [('sana1', 'word1'), ('sana2', 'word2'),
-            ('sana3', 'word3'), ('sana4', 'word4'), ('sana5', 'word5'), ('sana6', 'word6'),
-            ('sana7', 'word7'), ('sana8', 'word8'), ('sana9', 'word9'), ('sana10', 'word10'),
-            ('sana11', 'word11'), ('sana12', 'word12'), ('sana13', 'word13'), ('sana14', 'word14'),
-            ('sana15', 'word15'), ('sana16', 'word16'), ('sana17', 'word17'), ('sana18', 'word18'),
-            ('sana19', 'word19'), ('sana20', 'word20'), ('sana21', 'word21'), ('sana22', 'word22'),
-            ('sana23', 'word23'), ('sana24', 'word24'), ('sana225', 'word25'), ('sana26', 'word26'),
-            ('sana27', 'word27'), ('sana28', 'word28')]
+        self._words_chosen_to_practise = self.practise_repository.get_words_with_translations(
+            lang_orig, lang_transl
+        )
 
         if len(self._words_chosen_to_practise) > 5:
             self._indexes_buttons_word_orig = [0, 1, 2, 3, 4]
