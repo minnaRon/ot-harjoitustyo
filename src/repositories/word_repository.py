@@ -1,4 +1,3 @@
-from entities.word import Word
 from database_connection import get_database_connection
 
 
@@ -9,7 +8,7 @@ class WordRepository:
     def _add_word_returning_id(self, word, lang):
         cursor = self.__connection.cursor()
 
-        sql = '''INSERT INTO Words (word, language) 
+        sql = '''INSERT INTO Words (word, language)
             VALUES (:word, :lang)
             '''
         dictionary = {'word': word, 'lang': lang}
@@ -43,7 +42,9 @@ class WordRepository:
 
             self.__connection.commit()
 
-            return cursor.lastrowid
+            word_pair_id = cursor.lastrowid
+
+        return word_pair_id
 
     def _get_word_pair(self, word_orig_id, word_transl_id):
         cursor = self.__connection.cursor()
@@ -59,9 +60,8 @@ class WordRepository:
 
     def add_all_words_from_file_to_database(self, file):
 
-        with open(file) as file:
-
-            for row in file:
+        with open(file) as file_words:
+            for row in file_words:
                 parts = row.strip().split(";")
                 word_orig, word_transl = parts
                 self.add_pair_word_and_translation(

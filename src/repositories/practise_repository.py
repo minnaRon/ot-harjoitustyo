@@ -1,4 +1,3 @@
-from entities.word import Word
 from database_connection import get_database_connection
 
 

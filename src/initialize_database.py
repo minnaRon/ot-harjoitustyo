@@ -1,10 +1,9 @@
 from database_connection import get_database_connection
 
-'''
-using in class:
-from initialize_database import initialize_database
-initialize_database()
-'''
+
+# using in class:
+# from initialize_database import initialize_database
+# initialize_database()
 
 
 def drop_tables(connection):
