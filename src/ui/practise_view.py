@@ -44,7 +44,6 @@ class PractiseView:
         self._response_label.grid_remove()
 
     def __initialize(self):
-        print("----pv--words", self.__words)
         self.__frame = ttk.Frame(master=self.__root)
         self.__frame['padding'] = (5, 5, 5, 10)
         label = ttk.Label(

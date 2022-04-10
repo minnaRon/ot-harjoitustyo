@@ -13,28 +13,35 @@ class UI:
         self.__current_view = None
         self.__practise_service = practise_service
 
+
     def start(self):
         self.__show_main_view()
+
 
     def __hide_current_view(self):
         if self.__current_view:
             self.__current_view.destroy()
         self.__current_view = None
 
+
     def handle_button_click(self, button_number):
         self.__practise_service.check_word_pair(button_number - 1)
         # poista vvv kun sanojen vaihto muuttujilla
         self.__show_practise_view()
 
+
     def __handle_main(self):
         self.__show_main_view()
+
 
     def __handle_add_words(self):
         self.__show_add_words_view()
 
+
     def __handle_practise(self):
         self.__practise_service._set_words_to_practise("Finnish", "English")
         self.__show_practise_view()
+
 
     def __show_main_view(self):
         self.__hide_current_view()
@@ -42,10 +49,12 @@ class UI:
             self.__root, self.__handle_practise, self.__handle_add_words)
         self.__current_view.pack()
 
+
     def __show_add_words_view(self):
         self.__hide_current_view()
         self.__current_view = AddWordsView(self.__root, self.__handle_main)
         self.__current_view.pack()
+
 
     def __show_practise_view(self):
         self.__hide_current_view()

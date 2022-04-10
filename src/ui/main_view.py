@@ -3,7 +3,6 @@ from tkinter import Tk, ttk, constants
 
 class MainView:
     def __init__(self, root, handle_practise, handle_add_words):
-
         self.__root = root
         self.__handle_practise = handle_practise
         self.__handle_add_words = handle_add_words

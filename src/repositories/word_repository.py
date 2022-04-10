@@ -5,6 +5,7 @@ class WordRepository:
     def __init__(self, connection):
         self.__connection = connection
 
+
     def _add_word_returning_id(self, word, lang):
         cursor = self.__connection.cursor()
 
@@ -17,6 +18,7 @@ class WordRepository:
         self.__connection.commit()
 
         return cursor.lastrowid
+
 
     def add_pair_word_and_translation(self, word_orig, lang_orig, word_transl, lang_transl) -> int:
 
@@ -46,6 +48,7 @@ class WordRepository:
 
         return word_pair_id
 
+
     def _get_word_pair(self, word_orig_id, word_transl_id):
         cursor = self.__connection.cursor()
 
@@ -58,6 +61,7 @@ class WordRepository:
         result = cursor.fetchone()
         return result[0] if result else result
 
+
     def add_all_words_from_file_to_database(self, file):
 
         with open(file) as file_words:
@@ -66,6 +70,7 @@ class WordRepository:
                 word_orig, word_transl = parts
                 self.add_pair_word_and_translation(
                     word_orig, "Finnish", word_transl, "English")
+
 
     def _get_word_id(self, word, lang):
         cursor = self.__connection.cursor()
