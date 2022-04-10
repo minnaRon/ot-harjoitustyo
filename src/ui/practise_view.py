@@ -1,17 +1,22 @@
 from tkinter import Tk, ttk, constants, StringVar
 from services.practise_service import (
-        practise_service as default_practise_service
+    practise_service as default_practise_service
 )
 
+
 class PractiseView:
-    def __init__(self, root, handle_main, handle_button_click, practise_service = default_practise_service):
+    def __init__(self, root, handle_main, handle_button_click,
+                 practise_service=default_practise_service
+                 ):
         self.__root = root
-        self.__handle_main = handle_main
         self.__frame = None
+        self.__handle_main = handle_main
+        self.__handle_button_click = handle_button_click
+
         self.__words = practise_service.get_words_to_practise()
         self.__button_word_index_orig = practise_service.get_word_orig_indexes()
         self.__button_word_index_transl = practise_service.get_word_transl_indexes()
-        self.__handle_button_click = handle_button_click
+
         self.__response = practise_service.get_response()
         self._response_variable = None
         self._response_label = None
@@ -39,16 +44,17 @@ class PractiseView:
         self._response_label.grid_remove()
 
     def __initialize(self):
+        print("----pv--words", self.__words)
         self.__frame = ttk.Frame(master=self.__root)
-
+        self.__frame['padding'] = (5, 5, 5, 10)
         label = ttk.Label(
-                master=self.__frame, 
-                text="Tervetuloa sanastotreeniin!"
-                )
+            master=self.__frame,
+            text="Tervetuloa sanastotreeniin!"
+        )
 
         self._response_variable = StringVar()
         self._response_variable.set("testi")
-        
+
         self._response_label = ttk.Label(
             master=self.__frame,
             textvariable=self._response_variable,

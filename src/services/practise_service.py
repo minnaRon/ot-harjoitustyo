@@ -37,7 +37,7 @@ class PractiseService:
     def _change_button_word_indexes(self, learned_word_i):
         biggest_index = max(self._indexes_buttons_word_orig)
 
-        if biggest_index < len(self._words_chosen_to_practise) -5:
+        if biggest_index < len(self._words_chosen_to_practise) - 5:
 
             self._indexes_buttons_word_orig.remove(learned_word_i)
             self._indexes_buttons_word_transl.remove(learned_word_i)
@@ -71,7 +71,7 @@ class PractiseService:
 
     def check_word_pair(self, button_index):
 
-        if self._first_clicked_word_i is None and button_index <5:
+        if self._first_clicked_word_i is None and button_index < 5:
             word_index = self._indexes_buttons_word_orig[button_index]
             self._first_clicked_word_i = word_index
 
