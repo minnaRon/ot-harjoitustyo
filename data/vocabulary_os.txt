@@ -224,4 +224,3 @@ write back;lopuksikirjoittava (välimuisti)
 write through;läpikirjoittava (välimusti)
 zero-day vulnerability;nollapäivän aukko, tietoturva-aukko joka tulee julki vasta hyökkäyspäivänä
 zombie;piilo-ohjelma
-  	 

@@ -9,4 +9,3 @@
 |  2.4. | 8    | projektin runko, harjoitteluominaisuuden koodailua |
 |  3.4. | 8    | changelog, harjoitteluominaisuuteen näkymiä |
 |  4.4. | 3    | muutama testi, README.md päivitys |
-|
