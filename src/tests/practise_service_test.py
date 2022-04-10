@@ -1,10 +1,20 @@
 import unittest
 from services.practise_service import PractiseService
 
+class FakePractiseRepository:
+    def __init__(self, connection=None):
+        self.words = []
+
+    def get_words_with_translations(self, lang_orig, lang_transl):
+        for i in range(1, 10+1):
+            self.words += ("sana"+str(i), "word"+str(i))
+        return self.words
+
+
 class TestPractiseService(unittest.TestCase):
     def setUp(self):
-        self.service = PractiseService()
-        self.service._set_words_to_practise('finnish', 'english')
+        self.service = PractiseService(FakePractiseRepository())
+        self.service._set_words_to_practise('Finnish', 'English')
 
     def test_method_set_words_created_list_with_words(self):
         self.assertTrue(self.service._words_chosen_to_practise)
