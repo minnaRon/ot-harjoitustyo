@@ -29,7 +29,7 @@ Päänäkymästä, sanaston harjoittelu -näkymästä ja sanaston lisäys -näky
 ### Ennen kirjautumista
 
 **Käyttäjä voi**
-- harjoitella sanastoa ilman edistymisen tallentamista
+- harjoitella sanastoa ilman edistymisen tallentamista (tehty)
 - rekisteröityä sovelluksen käyttäjäksi luomalla tunnuksen ja halutessaan myös salasanan
     - tunnuksen pituuden tulee olla 2 - 20 merkkiä ja sen tulee olla uniikki
     - salasana ei ole pakollinen
