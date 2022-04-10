@@ -6,6 +6,7 @@ htmlcov
 .DS_Store
 *.py[cod]
 *$py.class
+dev
 
 #data files
 data/database.sqlite
