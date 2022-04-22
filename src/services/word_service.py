@@ -19,9 +19,9 @@ class WordService:
             words_orig, words_transl = words_transl, words_orig
             lang_orig, lang_transl = lang_transl, lang_orig
 
-        for i in range(len(words_orig)):
+        for i, word_orig in enumerate(words_orig, start=0):
             self.add_word_with_translation(
-                words_orig[i], self._languages[lang_orig],
+                word_orig, self._languages[lang_orig],
                 words_transl[i], self._languages[lang_transl]
             )
 
