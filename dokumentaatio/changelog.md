@@ -25,3 +25,18 @@
 - Lisätty testiluokkiin testejä
 - Lisätty arkkitehtuuri.md, jossa sovelluslogiikan kannalta oleelliset luokat
 - Lisätty formatointiin ja koodin laadun testaukseen autopep8 ja taskeja
+
+## Viikko 3
+
+- Rekisteröitymisominaisuus käytettävissä, käyttäjän tiedot tallennetaan tietokantaan
+- Sovellukseen voi kirjautua ja päänäkymässä voi kirjautua sovelluksesta ulos
+- Kirjautuneella ja kirjautumattomalla käyttäjällä on päänäkymässä valittavissa erilaiset toiminnallisuudet
+- Kirjautuneen käyttäjän harjoittelun edistymistä seurataan
+- Harjoittelun edistyminen tallentuu tietokantaan ja vaikuttaa harjoiteltavaksi tuotavaan sanastoon
+- Sanaston sanojen lisäystoiminnallisuus siirretty vain kirjautuneen käyttäjän käyttöön
+- Lisätty luokat LoginView, RegisterView, UserService, UserRepository ja Person käyttäjien hallintaan
+- Lisatty tietokantaan taulu Persons käyttäjien tallentamiseen
+- Lisätty luokka Practice yksittäisen sanaparin harjoittelun edistymisen seurantaan
+- Lisätty tietokantaan taulu Practices harjoittelun edistymisen tallentamiseen sanaparitasolla
+- Lisätty testiluokka TestUserService ja muutama testi
+- Lisätty sekvenssikaavio kuvaten sanaparin lisäämisen
