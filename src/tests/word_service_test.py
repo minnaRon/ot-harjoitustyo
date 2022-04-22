@@ -17,4 +17,4 @@ class TestWordService(unittest.TestCase):
 
     def test_when_word_view_calls_add_words_then_method_calls_repository_to_add_pair_languages_in_english(self):
         self.word_service._add_words(['sana', 'toinen'], 'suomi', ['word', 'another'], 'englanti')
-        self.word_repo_mock.add_pair_word_and_translation.assert_called_with('toinen', 'Finnish', 'another', 'English')
+        self.word_repo_mock.add_pair_word_and_translation.assert_called_with('another', 'English','toinen', 'Finnish')

@@ -14,7 +14,7 @@ class FakePractiseRepository:
 class TestPractiseService(unittest.TestCase):
     def setUp(self):
         self.service = PractiseService(FakePractiseRepository())
-        self.service._set_words_to_practise('Finnish', 'English')
+        self.service._set_words_to_practise('English', 'Finnish')
 
     def test_method_set_words_created_list_with_words(self):
         self.assertTrue(self.service._words_chosen_to_practise)

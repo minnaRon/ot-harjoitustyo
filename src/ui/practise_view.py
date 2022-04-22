@@ -12,12 +12,12 @@ class PractiseView:
         self.__frame = None
         self.__handle_main = handle_main
         self.__handle_button_click = handle_button_click
+        self.__practise_service = practise_service
+        self.__words = None
+        self.__button_word_index_orig = None
+        self.__button_word_index_transl = None
 
-        self.__words = practise_service.get_words_to_practise()
-        self.__button_word_index_orig = practise_service.get_word_orig_indexes()
-        self.__button_word_index_transl = practise_service.get_word_transl_indexes()
-
-        self.__response = practise_service.get_response()
+        self.__response = None
         self._response_variable = None
         self._response_label = None
 
@@ -36,6 +36,10 @@ class PractiseView:
     def destroy(self):
         self.__frame.destroy()
 
+    def __practice_handler(self):
+        self.__practise_service.save_points()
+        self.__handle_main()
+
     def _show_response(self, message):
         self._response_variable.set(message)
         self._response_label.grid()
@@ -50,7 +54,11 @@ class PractiseView:
             master=self.__frame,
             text="Tervetuloa sanastotreeniin!"
         )
+        self.__words = self.__practise_service.get_words_to_practise()
+        self.__button_word_index_orig = self.__practise_service.get_word_orig_indexes()
+        self.__button_word_index_transl = self.__practise_service.get_word_transl_indexes()
 
+        self.__response = self.__practise_service.get_response()
         self._response_variable = StringVar()
         self._response_variable.set("testi")
 
@@ -62,68 +70,68 @@ class PractiseView:
 
         word_button1 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_orig[0]][0],
+            text=self.__words[self.__button_word_index_orig[0]].word_orig,
             command=lambda: self.__handle_button_click(1)
         )
 
         word_button2 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_orig[1]][0],
+            text=self.__words[self.__button_word_index_orig[1]].word_orig,
             command=lambda: self.__handle_button_click(2)
         )
 
         word_button3 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_orig[2]][0],
+            text=self.__words[self.__button_word_index_orig[2]].word_orig,
             command=lambda: self.__handle_button_click(3)
         )
 
         word_button4 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_orig[3]][0],
+            text=self.__words[self.__button_word_index_orig[3]].word_orig,
             command=lambda: self.__handle_button_click(4)
         )
 
         word_button5 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_orig[4]][0],
+            text=self.__words[self.__button_word_index_orig[4]].word_orig,
             command=lambda: self.__handle_button_click(5)
         )
 
         word_button6 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_transl[0]][1],
+            text=self.__words[self.__button_word_index_transl[0]].word_transl,
             command=lambda: self.__handle_button_click(6)
         )
 
         word_button7 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_transl[1]][1],
+            text=self.__words[self.__button_word_index_transl[1]].word_transl,
             command=lambda: self.__handle_button_click(7)
         )
 
         word_button8 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_transl[2]][1],
+            text=self.__words[self.__button_word_index_transl[2]].word_transl,
             command=lambda: self.__handle_button_click(8)
         )
 
         word_button9 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_transl[3]][1],
+            text=self.__words[self.__button_word_index_transl[3]].word_transl,
             command=lambda: self.__handle_button_click(9)
         )
 
         word_button10 = ttk.Button(
             master=self.__frame,
-            text=self.__words[self.__button_word_index_transl[4]][1],
+            text=self.__words[self.__button_word_index_transl[4]].word_transl,
             command=lambda: self.__handle_button_click(10)
         )
 
         button = ttk.Button(
             master=self.__frame,
             text="takaisin päävalikkoon",
-            command=self.__handle_main
+            command=self.__practice_handler
         )
 
         label.grid(row=0, column=0)

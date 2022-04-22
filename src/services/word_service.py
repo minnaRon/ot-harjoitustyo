@@ -14,6 +14,11 @@ class WordService:
         self._languages = {'suomi': 'Finnish', 'englanti': 'English'}
 
     def _add_words(self, words_orig, lang_orig, words_transl, lang_transl):
+
+        if lang_orig == 'suomi':
+            words_orig, words_transl = words_transl, words_orig
+            lang_orig, lang_transl = lang_transl, lang_orig
+
         for i in range(len(words_orig)):
             self.add_word_with_translation(
                 words_orig[i], self._languages[lang_orig],

@@ -32,6 +32,7 @@ class WordRepository:
                 word_transl, lang_transl)
 
         word_pair_id = self._get_word_pair(word_orig_id, word_transl_id)
+
         if not word_pair_id:
             cursor = self.__connection.cursor()
 
@@ -40,6 +41,7 @@ class WordRepository:
                     '''
             dictionary = {'word_orig_id': word_orig_id,
                           'word_transl_id': word_transl_id}
+
             cursor.execute(sql, dictionary)
 
             self.__connection.commit()
@@ -64,12 +66,12 @@ class WordRepository:
 
     def add_all_words_from_file_to_database(self, file):
 
-        with open(file) as file_words:
+        with open(file, encoding='utf-8') as file_words:
             for row in file_words:
                 parts = row.strip().split(";")
                 word_orig, word_transl = parts
                 self.add_pair_word_and_translation(
-                    word_orig, "Finnish", word_transl, "English")
+                    word_orig, "English", word_transl, "Finnish")
 
 
     def _get_word_id(self, word, lang):
