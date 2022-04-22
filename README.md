@@ -18,6 +18,8 @@ Sovelluksen sujuvan toiminnan kannalta Python -version tulisi olla vähintään 
 
 [changelog](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
+[release](https://github.com/minnaRon/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Asennus
 
 1. Asenna riippuvuudet komennolla:
