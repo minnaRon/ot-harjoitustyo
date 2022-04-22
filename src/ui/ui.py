@@ -5,7 +5,8 @@ from services.practise_service import (
 from ui.main_view import MainView
 from ui.practise_view import PractiseView
 from ui.add_words_view import AddWordsView
-
+from ui.login_view import LoginView
+from ui.register_view import RegisterView
 
 class UI:
     def __init__(self, root, practise_service=default_practise_service):
