@@ -10,6 +10,7 @@
 - Lisätty sovelluksen käynnistysohjeet ja task käynnistykseen sekä testaukseen
 - Lisätty UI, MainView ja PractiseView -luokat graafiselle käyttöliittymälle
 - Lisätty PractiseService -luokka vastaamaan sovelluslogiikan koodista
+- Lisätty luokka TestPractiseService ja muutama testi
 
 ## Viikko 2
 
@@ -20,7 +21,7 @@
 - Lisätty GitHubiin tietokanta, jossa harjoiteltavia sanoja on valmiina
 - Lisätty AddWordsView -luokka graafiselle käyttöliittymälle
 - Lisätty PractiseRepository ja WordRepository -luokat tiedon hakuun ja tallennukseen
-- Lisätty testiluokat TestPractiseService ja TestWordService
+- Lisätty testiluokka TestWordService
 - Lisätty testiluokkiin testejä
 - Lisätty arkkitehtuuri.md, jossa sovelluslogiikan kannalta oleelliset luokat
 - Lisätty formatointiin ja koodin laadun testaukseen autopep8 ja taskeja
