@@ -61,4 +61,13 @@ class PractiseRepository:
         self.__connection.commit()
 
 
+    def delete_all(self):
+
+        cursor = self.__connection.cursor()
+
+        cursor.execute('DELETE FROM Practices')
+
+        self.__connection.commit()
+
+
 practise_repository = PractiseRepository(get_database_connection())

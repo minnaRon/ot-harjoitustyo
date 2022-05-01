@@ -37,4 +37,13 @@ class UserRepository:
 
         return None
 
+
+    def delete_all(self):
+        cursor = self.__connection.cursor()
+
+        cursor.execute('DELETE FROM Persons')
+
+        self.__connection.commit()
+
+
 user_repository = UserRepository(get_database_connection())
