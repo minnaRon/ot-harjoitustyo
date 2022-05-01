@@ -21,101 +21,139 @@ class PractiseService:
         self._response = None
         self._counter = 0
 
+
     def get_response(self):
         return self._response
+
 
     def get_words_to_practise(self):
         return self._words_chosen_to_practise
 
+
     def get_word_orig_indexes(self):
         return self._indexes_buttons_word_orig
+
 
     def get_word_transl_indexes(self):
         return self._indexes_buttons_word_transl
 
-    def check_pair(self, word_i):
-        self._user = self._user_service.get_current_user()
-
-        if self._first_clicked_word_i == word_i:
-
-            if self._user:
-                self._subtract_points(word_i)
-
-            self._first_clicked_word_i = None
-            self._response = 'pari!'
-            self._change_button_word_indexes(word_i)
-
-        else:
-
-            if self._user:
-                self._add_points(word_i)
-
-            self._first_clicked_word_i = None
-            self._response = 'huti!'
-
-        self._counter += 1
-
-
-    def _change_button_word_indexes(self, learned_word_i):
-        self._user = self._user_service.get_current_user()
-        biggest_index = max(self._indexes_buttons_word_orig)
-
-        if biggest_index < len(self._words_chosen_to_practise) - 5:
-
-            self._indexes_buttons_word_orig.remove(learned_word_i)
-            self._indexes_buttons_word_transl.remove(learned_word_i)
-
-            if self._user:
-                biggest_i_with_points_left = self._check_next_i_with_points_left(biggest_index+1)
-                self._indexes_buttons_word_orig.append((biggest_i_with_points_left))
-                self._add_counter_reading(biggest_index + 1)
-
-            else:
-                self._indexes_buttons_word_orig.append((biggest_index+1))
-
-            self._indexes_buttons_word_transl = self._indexes_buttons_word_orig[:]
-            shuffle(self._indexes_buttons_word_transl)
-
-        else:
-            self._response = '''HIENOA! Olet osannut kaikki sanat kerran!
-                             Jos haluat harjoitella sanoja tehokkaammin, 
-                             kirjautuneena saat kaikki sovelluksen ominaisuudet
-                              käyttöösi.'''
-
-    def _set_words_to_practise(self, lang_orig, lang_transl):
+    def set_words_to_practise(self, lang_orig, lang_transl):
         self._user = self._user_service.get_current_user()
         self._counter = 0
-        self._words_chosen_to_practise = self._practise_repository.get_words_with_translations(
-            lang_orig, lang_transl
-        )
-
+        self._words_chosen_to_practise = (
+            self._practise_repository.get_words_with_translations(lang_orig, lang_transl
+        ))
         if self._user:
-            self._add_already_practised_info()
+            self._prepare_chosen_words_including_progress()
 
         if len(self._words_chosen_to_practise) > 5:
-            self._indexes_buttons_word_orig = [0, 1, 2, 3, 4]
-            self._indexes_buttons_word_transl = self._indexes_buttons_word_orig[:]
-            shuffle(self._indexes_buttons_word_transl)
+            self._prepare_button_word_indexes()
 
         else:
             self._response = '''Harjoiteltavien sanojen määrä liian pieni,
                                 valitse lisää harjoiteltavia sanoja'''
 
-    def set_clicked_word_index(self, word_i):
-        self._first_clicked_word_i = word_i
+
+    def _prepare_button_word_indexes(self):
+        self._indexes_buttons_word_orig = [0, 1, 2, 3, 4]
+        self._indexes_buttons_word_transl = self._indexes_buttons_word_orig[:]
+        shuffle(self._indexes_buttons_word_transl)
+
 
     def check_word_pair(self, button_index):
 
         if self._first_clicked_word_i is None and button_index < 5:
-            word_index = self._indexes_buttons_word_orig[button_index]
-            self._first_clicked_word_i = word_index
+            self._set_first_selected_word_index(button_index)
 
         elif self._first_clicked_word_i is not None and button_index >= 5:
-            word_index = self._indexes_buttons_word_transl[button_index-5]
-            self.check_pair(word_index)
+            second_clicked_word_index = self._get_word_i_of_button_word(button_index)
+            self._check_correctness_of_pair(second_clicked_word_index)
+
         else:
             self._first_clicked_word_i = None
             self._response = 'valitse ensin yksi sana vasemmalta'
+
+
+    def _set_first_selected_word_index(self, button_index):
+        word_index = self._indexes_buttons_word_orig[button_index]
+        self._first_clicked_word_i = word_index
+        # lisaa kun muutkin variablet self._response = None
+
+
+    def _get_word_i_of_button_word(self, button_index):
+        return self._indexes_buttons_word_transl[button_index-5]
+
+
+    def _check_correctness_of_pair(self, word_i):
+        self._user = self._user_service.get_current_user()
+
+        if self._first_clicked_word_i == word_i:
+            self._act_as_pair_correct(word_i)
+
+        else:
+            self._act_as_pair_not_correct(word_i)
+
+        self._first_clicked_word_i = None
+        self._counter += 1
+
+
+    def _act_as_pair_correct(self, word_i):
+
+        if self._user:
+            self._subtract_points(word_i)
+
+        self._response = 'pari!'
+        self._change_button_word_indexes(word_i)
+
+
+    def _change_button_word_indexes(self, learned_word_i):
+        self._user = self._user_service.get_current_user()
+        buttons_biggest_word_index_now = max(self._indexes_buttons_word_orig)
+
+        if self._words_to_practise_still_left(buttons_biggest_word_index_now):
+
+            self._remove_learned_word_i_from_button_word_indexes(learned_word_i)
+
+            if self._user:
+                self._add_new_word_index_to_button_word_orig_indexes_depending_on_progress(
+                    buttons_biggest_word_index_now
+                    )
+            else:
+                self._indexes_buttons_word_orig.append((buttons_biggest_word_index_now +1))
+
+            self._prepare_translation_word_indexes_for_buttons()
+
+        else:
+            self._response = 'HIENOA! Olet osannut kaikki sanat kerran!'
+
+
+    def _words_to_practise_still_left(self, buttons_biggest_word_index_now):
+        return buttons_biggest_word_index_now < len(self._words_chosen_to_practise) - 5
+
+
+    def _remove_learned_word_i_from_button_word_indexes(self, learned_word_i):
+        self._indexes_buttons_word_orig.remove(learned_word_i)
+        self._indexes_buttons_word_transl.remove(learned_word_i)
+
+
+    def _add_new_word_index_to_button_word_orig_indexes_depending_on_progress(self, biggest_index):
+        biggest_i_with_points_left = self._check_next_i_with_points_left(biggest_index+1)
+        self._indexes_buttons_word_orig.append((biggest_i_with_points_left))
+        self._add_counter_reading_for_progress(biggest_index + 1)
+
+
+    def _prepare_translation_word_indexes_for_buttons(self):
+        self._indexes_buttons_word_transl = self._indexes_buttons_word_orig[:]
+        shuffle(self._indexes_buttons_word_transl)
+
+
+    def _act_as_pair_not_correct(self, word_i):
+
+        if self._user:
+            self._add_points(word_i)
+
+        self._response = 'huti!'
+
 
     def _check_next_i_with_points_left(self, next_i):
 
@@ -126,43 +164,58 @@ class PractiseService:
 
         return -1
 
-    def _add_already_practised_info(self):
+
+    def _prepare_chosen_words_including_progress(self):
         self._user = self._user_service.get_current_user()
         self._already_practised = self._practise_repository.get_practices(self._user.id)
-        remove_set = set()
+
+        self._remove_already_learned_words()
 
         for pair in self._words_chosen_to_practise:
 
             if pair.translation_id in self._already_practised.keys():
+                pair.id = self._already_practised[pair.translation_id].id
+                pair.person_id = self._already_practised[pair.translation_id].person_id
+                pair.points_left = self._already_practised[pair.translation_id].points_left
+                pair.new = False
 
-                if self._already_practised[pair.translation_id].points_left == 0:
-                    remove_set.add(pair)
 
-                else:
-                    pair.id = self._already_practised[pair.translation_id].id
-                    pair.person_id = self._already_practised[pair.translation_id].person_id
-                    pair.points_left = self._already_practised[pair.translation_id].points_left
-                    pair.new = False
+    def _remove_already_learned_words(self):
+        already_learned = set()
+
+        for pair in self._words_chosen_to_practise:
+            if (pair.translation_id in self._already_practised.keys()
+                and self._already_practised[pair.translation_id].points_left == 0):
+
+                already_learned.add(pair)
 
         self._words_chosen_to_practise = list(
-            filter(lambda pair : pair not in remove_set, self._words_chosen_to_practise)
+            filter(lambda pair : pair not in already_learned, self._words_chosen_to_practise)
             )
+
 
     def _subtract_points(self, word_i):
         practiced_pair = self._words_chosen_to_practise[word_i]
         clicks_before_answer = self._counter - practiced_pair.counter_start
+
         practiced_pair.points_left -= (5 - clicks_before_answer)
+
         practiced_pair.points_left = max(0, practiced_pair.points_left)
         practiced_pair.points_left = min(15, practiced_pair.points_left)
 
+
     def _add_points(self, word_i):
         practiced_pair = self._words_chosen_to_practise[word_i]
+
         practiced_pair.points_left += 5
+
         practiced_pair.points_left = min(15, practiced_pair.points_left)
 
-    def _add_counter_reading(self, word_i):
+
+    def _add_counter_reading_for_progress(self, word_i):
         practiced_pair = self._words_chosen_to_practise[word_i]
         practiced_pair.counter_start = self._counter +1
+
 
     def save_points(self):
         self._user = self._user_service.get_current_user()

@@ -21,10 +21,10 @@ class TestPractiseService(unittest.TestCase):
 
     def test_when_words_are_pair_then_string_pari_in_response_variable(self):
         self.service._first_clicked_word_i = 2
-        self.service.check_pair(2)
+        self.service._check_correctness_of_pair(2)
         self.assertEqual(self.service._response, 'pari!')
 
     def test_when_words_not_pair_then_string_huti_in_response_variable(self):
         self.service._first_clicked_word_i = 2
-        self.service.check_pair(1)
+        self.service._check_correctness_of_pair(1)
         self.assertEqual(self.service._response, 'huti!')

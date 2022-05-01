@@ -48,7 +48,7 @@ class UI:
 
 
     def __handle_practise(self):
-        self.__practise_service._set_words_to_practise("English", "Finnish")
+        self.__practise_service.set_words_to_practise("English", "Finnish")
         self.__show_practise_view()
 
 
