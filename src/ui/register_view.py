@@ -64,6 +64,12 @@ class RegisterView:
             master=self.__frame,
             text="Rekisteröityminen"
         )
+        button_main = ttk.Button(
+            master=self.__frame,
+            text="takaisin päävalikkoon",
+            command=self.__handle_main
+        )
+
         label_username = ttk.Label(
             master=self.__frame,
             text="tunnus: "
@@ -95,6 +101,7 @@ class RegisterView:
         )
 
         label_title.grid(row=1, column=0)
+        button_main.grid(row=1, column=1)
         label_username.grid(row=2, column=0)
         self.__entry_username.grid(row=2, column=1)
         label_password1.grid(row=3, column=0)

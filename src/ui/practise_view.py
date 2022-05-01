@@ -2,20 +2,26 @@ from tkinter import Tk, ttk, constants, StringVar
 from services.practise_service import (
     practise_service as default_practise_service
 )
+from services.user_service import (
+    user_service as default_user_service
+)
 
 
 class PractiseView:
     def __init__(self, root, handle_main, handle_button_click,
-                 practise_service=default_practise_service
+                 practise_service=default_practise_service,
+                 user_service=default_user_service
                  ):
         self.__root = root
         self.__frame = None
         self.__handle_main = handle_main
         self.__handle_button_click = handle_button_click
+        self.__user_service = user_service
         self.__practise_service = practise_service
         self.__words = None
         self.__button_word_index_orig = None
         self.__button_word_index_transl = None
+        self.__user = self.__user_service.get_current_user()
 
         self.__response = None
         self._response_variable = None
@@ -36,6 +42,12 @@ class PractiseView:
     def destroy(self):
         self.__frame.destroy()
 
+    def __logout_handler(self):
+        self.__practise_service.save_points()
+        self.__user_service.logout()
+        self.__user = None
+        self.__handle_main()
+
     def __practice_handler(self):
         self.__practise_service.save_points()
         self.__handle_main()
@@ -54,6 +66,19 @@ class PractiseView:
             master=self.__frame,
             text="Tervetuloa sanastotreeniin!"
         )
+        if self.__user:
+
+            label_username = ttk.Label(
+            master=self.__frame,
+            text=f"Kirjautuneena {self.__user.name}"
+                )
+
+            button_logout = ttk.Button(
+                master=self.__frame,
+                text="Kirjaudu ulos",
+                command=self.__logout_handler
+                )
+
         self.__words = self.__practise_service.get_words_to_practise()
         self.__button_word_index_orig = self.__practise_service.get_word_orig_indexes()
         self.__button_word_index_transl = self.__practise_service.get_word_transl_indexes()
@@ -136,6 +161,9 @@ class PractiseView:
 
         label.grid(row=0, column=0)
         button.grid(row=1, column=0)
+        if self.__user:
+            label_username.grid(row=0, column=2)
+            button_logout.grid(row=1, column=2)
 
         word_button1.grid(row=2, column=0)
         word_button2.grid(row=3, column=0)
