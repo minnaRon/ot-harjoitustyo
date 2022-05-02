@@ -3,12 +3,26 @@ from entities.practise import Practice
 
 
 class PractiseRepository:
-
+    """Class takes care of database operations related to practiced pairs of words."""
     def __init__(self, connection):
+        """Constructor creates database connection
+
+        Args:
+            connection (object):    object of database connection
+        """
         self.__connection = connection
 
 
     def get_words_with_translations(self, lang_orig, lang_transl):
+        """Returns Practice objects of all pairs of words where languages are as asked.
+
+        Args:
+            lang_orig (string):     language of origin word
+            lang_transl (string):   language of translation
+
+        Returns:
+            object Practice:  object contains origin word, translation, id of word pair
+        """
         cursor = self.__connection.cursor()
         cursor.execute('''
                 SELECT O.word, T.word, TR.id
@@ -26,6 +40,15 @@ class PractiseRepository:
 
 
     def get_practices(self, person_id):
+        """Returns Practice objects where person id is as asked.
+
+        Args:
+            person_id (int):    user id
+
+        Returns:
+            object Practice:    object contains object id, pair of words id, practicing points left.
+
+        """
         cursor = self.__connection.cursor()
         cursor.execute('''
                 SELECT id, translation_id, practicing_points_left
@@ -39,6 +62,11 @@ class PractiseRepository:
 
 
     def save_points(self, practice: Practice):
+        """Saves learning progress points of user concerning pair of words.
+
+        Args:
+            practice (Practice):    object contains learning progress of pair of words
+        """
         cursor = self.__connection.cursor()
         cursor.execute('''
             UPDATE Practices
@@ -50,6 +78,14 @@ class PractiseRepository:
 
 
     def create_practiced_pair(self, person_id, practice: Practice):
+        """Creates new pair of practised words in database.
+
+        Contains user id, pair of word id, learning progress points.
+
+        Args:
+            person_id (int):        rowid for user from database table Persons
+            practice (Practice):    object Practice containing new pair of practised words
+        """
         cursor = self.__connection.cursor()
         cursor.execute('''
             INSERT INTO Practices (
@@ -62,7 +98,7 @@ class PractiseRepository:
 
 
     def delete_all(self):
-
+        """Deletes all rows from table Practices."""
         cursor = self.__connection.cursor()
 
         cursor.execute('DELETE FROM Practices')
