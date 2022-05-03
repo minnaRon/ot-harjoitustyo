@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla käyttäjä voi helposti opetella vieraskielistä sanastoa. Kirjautunut käyttäjä voi tallentaa oman edistymisensä ja jatkaa harjoitteluaan myöhemmin.
+Sovelluksen avulla käyttäjä voi helposti opetella vieraskielistä sanastoa. Kirjautunut käyttäjä voi tallentaa oman edistymisensä ja jatkaa harjoitteluaan myöhemmin. Kirjautunut käyttäjä voi myös lisätä sanoja sanastoon.
 
 ## Käyttäjät
 
@@ -44,9 +44,9 @@ Päänäkymästä, sanaston harjoittelu -näkymästä ja sanaston lisäys -näky
 - lisätä sanoja sanastoon (tehty)
 - harjoitella sanaston sanoja (tehty)
 - seurata edistymistään sanojen oppimisessa lukumäärätasolla
-- tallentaa harjoittelun edistymisen
+- tallentaa harjoittelun edistymisen (tehty)
 - resetoida tallennetun edistymisen ja harjoitella uudelleen
-- kirjautua ulos sovelluksesta
+- kirjautua ulos sovelluksesta (tehty)
 
 ### Jatkokehitysideoita
 
