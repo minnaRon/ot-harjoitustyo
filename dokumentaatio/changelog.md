@@ -40,3 +40,13 @@
 - Lisätty tietokantaan taulu Practices harjoittelun edistymisen tallentamiseen sanaparitasolla
 - Lisätty testiluokka TestUserService ja muutama testi
 - Lisätty sekvenssikaavio kuvaten sanaparin lisäämisen
+
+## Viikko 4
+
+- Harjoittelunäkymässä voi kirjaudu ulos, jolloin automaattisesti harjoittelun edistyminen tallennetaan ja siirrytään päänäkymään
+- Kirjautumis- ja rekisteröitymisnäkymistä pääsee 'takaisin päävalikkoon' -painikkeella takaisin päänäkymään
+- Lisätty testejä luokille PractiseRepository, UserRepository, PractiseService, UserService, WordService
+- Lisätty docstringit luokkiin PractiseRepository, UserRepository, WordRepository, PractiseService, UserService, WordService, Person, Practice ja Word
+- Lisätty tiedostoon arkkitehtuuri.md pakkauskaavio, pakkaus- ja luokkakaavio sekä loogisen tietomallin kaavio
+- Lisätty tiedosto kayttoohje.md
+
