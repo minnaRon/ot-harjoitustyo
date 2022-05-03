@@ -1,6 +1,6 @@
 # Käyttöohje
 
-## Ohjelman käynnistäminen
+### Ohjelman käynnistäminen:
 
 Ennen käynnistämistä, asenna riippuvuudet komennolla:
 
@@ -14,23 +14,22 @@ Käynnistä ohjelma komennolla:
 poetry run invoke start
 ```
 
-## Sovelluksen käyttäminen
+### Sovelluksen käyttäminen:
 
-###Sovellus käynnistyy päänäkymään:
+## Sovellus käynnistyy päänäkymään
 
 ![](./kuvat/main.png)
 
+Sanastoa voi harjoitella myös ilman kirjautumista siirtymällä sanaston harjoittelunäkymään painamalla ‘HARJOITTELE’ -painiketta.
 
-### Sanoston harjoittelu ilman kirjautumista:
-
-Sanastoa voi harjoitella myös ilman kirjautumista, siirtymällä sanaston harjoittelunäkymään painamalla ‘HARJOITTELE’ -painiketta.
+## Sanaston harjoittelu ilman kirjautumista
 
 ![](./kuvat/practice.png)
 
 **Sanaston harjoittelu**
 - valitse ensin vasemmalta puolelta sana painamalla sanan painiketta
 - valitse sitten oikealta sanan käännös painamalla käännössanan painiketta
--> tämän jälkeen sovellus kertoo näkymään ilmestyvällä viestillä:
+- tämän jälkeen sovellus kertoo näkymään ilmestyvällä viestillä:
     - jos sanat vastaavat toisiaan, ilmestyy näkymään viesti pari! 
     - jos sanat eivät vastaa toisiaan, ilmestyy näkymään viesti huti!
 
@@ -39,41 +38,40 @@ Takaisin päävalikkoon pääsee painamalla ‘takaisin päävalikkoon’ -paini
 ![](./kuvat/main.png)
 
 
-### Tunnuksen luominen
+## Tunnuksen luominen
 
 Päänäkymässä painamalla painiketta ‘rekisteröidy’, pääsee rekisteröitymisnäkymään:
 
 ![](./kuvat/register.png)
 
+Näkymästä voi siirtyä rekisteröitymättä takaisin päävalikkoon painamalla
+‘takaisin päävalikkoon’ -painiketta.
+
 **Tunnus luodaan** 
 - syöttämällä tunnus tunnuksen syötekenttään
 - salasanan voi antaa salasanan syötekenttiin, se ei kuitenkaan ole pakollinen 
-    - lisätty salasana vaaditaan aina kirjautuessa
-Lopuksi painetaan ‘tallenna’ -painiketta
+    - salasana vaaditaan kirjautuessa, jos sellainen on annettu tunnusta luotaessa
+- lopuksi painetaan ‘tallenna’ -painiketta
+- rekisteröitymisen jälkeen siirrytään suoraan kirjautuneena päänäkymään
 
-Näkymästä voi myös siirtyä rekisteröitymättä takaisin päävalikkoon painamalla
-‘takaisin päävalikkoon’ -painiketta.
-
-Rekisteröitymisen jälkeen siirrytään suoraan päänäkymään:
-
-### Kirjautuminen
+## Kirjautuminen
 
 Päänäkymässä painettaessa ‘kirjaudu’ -painiketta, pääsee kirjautumisnäkymään:
 
 ![](./kuvat/login.png)
 
-Kirjautuessa olemassa oleva tunnus syotetään tunnuksen syötekenttään ja mahdollinen
-salasana salasanan syötekenttään.
-Lopuksi painetaan ‘kirjaudu’ -painiketta.
-
-Näkymästä voi myös siirtyä kirjautumatta takaisin päävalikkoon painamalla
+Näkymästä voi siirtyä kirjautumatta takaisin päävalikkoon painamalla
 ‘takaisin päävalikkoon’ -painiketta.
 
-Kirjautumisesi jälkeen siirrytään suoraan päänäkymään:
+**Kirjautuessa** 
+- olemassa oleva tunnus syotetään tunnuksen syötekenttään 
+- ja mahdollinen salasana salasanan syötekenttään
+- lopuksi painetaan ‘kirjaudu’ -painiketta.
+- kirjautumisen jälkeen siirrytään suoraan päänäkymään
 
 ![](./kuvat/loginmain.png)
 
-### Sanaston harjoittelu kirjautuneena
+## Sanaston harjoittelu kirjautuneena
 
 Päänäkymästä voi siirtyä harjoittelunäkymään painamalla HARJOITTELE -painiketta.
 
@@ -82,18 +80,19 @@ Päänäkymästä voi siirtyä harjoittelunäkymään painamalla HARJOITTELE -pa
 **Sanaston harjoittelu**
 - valitse ensin vasemmalta puolelta sana painamalla sanan painiketta
 - valitse sitten oikealta sanan käännös painamalla käännössanan painiketta
--> tämän jälkeen sovellus kertoo näkymään ilmestyvällä viestillä:
+- tämän jälkeen sovellus kertoo näkymään ilmestyvällä viestillä:
     - jos sanat vastaavat toisiaan, ilmestyy näkymään viesti pari! 
     - jos sanat eivät vastaa toisiaan, ilmestyy näkymään viesti huti!
 
-Takaisin päävalikkoon pääsee painamalla ‘takaisin päävalikkoon’ -painiketta.
-Kirjautuminen ulos painamalla 'kirjaudu ulos' -painiketta vie takaisin päävalikkoon
+**harjoittelun lopuksi**
+- takaisin päävalikkoon pääsee painamalla ‘takaisin päävalikkoon’ -painiketta.
+- kirjautuminen ulos painamalla 'kirjaudu ulos' -painiketta vie takaisin päävalikkoon
 kirjaten käyttäjän samalla ulos sovelluksesta.
 - molemmissa tapauksissa harjoittelun edistyminen tallennetaan tietokantaan.
 
 Oikean yläkulman rastista poistuttaessa edistymistä ei tallenneta.
 
-### Sanojen lisäys sanastoon kirjautuneena
+## Sanojen lisäys sanastoon kirjautuneena
 
 ![](./kuvat/loginmain.png)
 
