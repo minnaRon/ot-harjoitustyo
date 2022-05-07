@@ -61,7 +61,7 @@ class WordRepository:
         if not word_pair_id:
             cursor = self.__connection.cursor()
 
-            sql = '''INSERT INTO Translations (word_orig_id, word_transl_id)
+            sql = '''INSERT INTO Word_pairs (word_orig_id, word_transl_id)
                     VALUES (:word_orig_id, :word_transl_id)
                     '''
             dictionary = {'word_orig_id': word_orig_id,
@@ -89,7 +89,7 @@ class WordRepository:
         cursor = self.__connection.cursor()
 
         cursor.execute('''
-            SELECT id FROM Translations
+            SELECT id FROM Word_pairs
             WHERE (word_orig_id=:word_orig_id AND word_transl_id=:word_transl_id)
             OR (word_orig_id=:word_transl_id AND word_transl_id=:word_orig_id)
         ''', {'word_orig_id': word_orig_id, 'word_transl_id': word_transl_id}

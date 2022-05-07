@@ -1,5 +1,5 @@
-class Practice:
-    """Class to maintain information of learning progress."""
+class PracticedWordPair:
+    """Class to maintain information of learning progress of pair of words."""
 
     def __init__(
                 self, word_orig, word_transl, translation_id,

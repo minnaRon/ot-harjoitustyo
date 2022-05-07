@@ -8,8 +8,8 @@ from database_connection import get_database_connection
 
 def drop_tables(connection):
     cursor = connection.cursor()
-    cursor.execute("DROP TABLE IF EXISTS Practices;")
-    cursor.execute("DROP TABLE IF EXISTS Translations;")
+    cursor.execute("DROP TABLE IF EXISTS Practice_progress;")
+    cursor.execute("DROP TABLE IF EXISTS Word_pairs;")
     cursor.execute("DROP TABLE IF EXISTS Persons;")
     cursor.execute("DROP TABLE IF EXISTS Words;")
 
@@ -25,7 +25,7 @@ def create_tables(connection):
                     );
                     ''')
 
-    cursor.execute(''' CREATE TABLE Translations (
+    cursor.execute(''' CREATE TABLE Word_pairs (
                     id INTEGER PRIMARY KEY,
                     word_orig_id INTEGER REFERENCE Words,
                     word_transl_id INTEGER REFERENCE Words
@@ -39,10 +39,10 @@ def create_tables(connection):
                     );
                     ''')
 
-    cursor.execute(''' CREATE TABLE Practices (
+    cursor.execute(''' CREATE TABLE Practice_progress (
                     id INTEGER PRIMARY KEY,
                     person_id INTEGER REFERENCE Persons NOT NULL,
-                    translation_id INTEGER REFERENCE Translations NOT NULL,
+                    word_pair_id INTEGER REFERENCE Word_pairs NOT NULL,
                     practicing_points_left INTEGER
                     );
                     ''')

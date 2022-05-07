@@ -1,5 +1,5 @@
 from database_connection import get_database_connection
-from entities.practise import Practice
+from entities.practise import PracticedWordPair
 
 
 class PractiseRepository:
@@ -14,21 +14,21 @@ class PractiseRepository:
 
 
     def get_words_with_translations(self, lang_orig, lang_transl):
-        """Returns Practice objects of all pairs of words where languages are as asked.
+        """Returns PracticedWordPair objects of all pairs of words where languages are as asked.
 
         Args:
             lang_orig (string):     language of origin word
             lang_transl (string):   language of translation
 
         Returns:
-            object Practice:  object contains origin word, translation, id of word pair
+            object PracticedWordPair:  object contains origin word, translation, id of word pair
         """
         cursor = self.__connection.cursor()
         cursor.execute('''
-                SELECT O.word, T.word, TR.id
+                SELECT O.word, T.word, WP.id
                 FROM Words O
-                JOIN Translations TR ON TR.word_orig_id = O.id
-                JOIN Words T ON T.id = TR.word_transl_id
+                JOIN Word_pairs WP ON WP.word_orig_id = O.id
+                JOIN Words T ON T.id = WP.word_transl_id
                 WHERE O.language = ?
                 AND T.language = ?
                 ORDER BY length(O.word)
@@ -36,63 +36,66 @@ class PractiseRepository:
         )
         rows = cursor.fetchall()
 
-        return [Practice(row[0], row[1], row[2]) for row in rows]
+        return [PracticedWordPair(row[0], row[1], row[2]) for row in rows]
 
 
     def get_practices(self, person_id):
-        """Returns Practice objects where person id is as asked.
+        """Returns PracticedWordPair objects where person id is as asked.
 
         Args:
             person_id (int):    user id
 
         Returns:
-            object Practice:    object contains object id, pair of words id, practicing points left.
-
+            dict of objects PracticedWordPair:  dictionary contains objects of PracticedWordPair
+                                                object contains:
+                                                object id, pair of words id, practicing points left
         """
         cursor = self.__connection.cursor()
         cursor.execute('''
-                SELECT id, translation_id, practicing_points_left
-                FROM Practices
+                SELECT id, word_pair_id, practicing_points_left
+                FROM Practice_progress
                 WHERE person_id = ?
                 ''', [person_id]
         )
         rows = cursor.fetchall()
 
-        return {row[1]:Practice("", "", row[1], row[0], person_id, row[2]) for row in rows}
+        return {row[1]:PracticedWordPair("", "", row[1], row[0], person_id, row[2]) for row in rows}
 
 
-    def save_points(self, practice: Practice):
+    def save_points(self, practiced_word_pair: PracticedWordPair):
         """Saves learning progress points of user concerning pair of words.
 
         Args:
-            practice (Practice):    object contains learning progress of pair of words
+            practiced_word_pair (PracticedWordPair):    object contains learning progress
+                                                        of pair of words
         """
         cursor = self.__connection.cursor()
         cursor.execute('''
-            UPDATE Practices
+            UPDATE Practice_progress
             SET practicing_points_left = ?
             WHERE id = ?
-            ''', [practice.points_left, practice.id]
+            ''', [practiced_word_pair.points_left, practiced_word_pair.id]
             )
         self.__connection.commit()
 
 
-    def create_practiced_pair(self, person_id, practice: Practice):
+    def create_practiced_pair(self, person_id, practiced_word_pair: PracticedWordPair):
         """Creates new pair of practised words in database.
 
         Contains user id, pair of word id, learning progress points.
 
         Args:
             person_id (int):        rowid for user from database table Persons
-            practice (Practice):    object Practice containing new pair of practised words
+            practiced_word_pair (PracticedWordPair):    object PracticedWordPair
+                                                        containing new pair of practised words
         """
         cursor = self.__connection.cursor()
         cursor.execute('''
-            INSERT INTO Practices (
-                person_id, translation_id, practicing_points_left
+            INSERT INTO Practice_progress (
+                person_id, word_pair_id, practicing_points_left
                 )
             VALUES (?,?,?)
-            ''', [person_id, practice.translation_id, practice.points_left]
+            ''', [person_id, practiced_word_pair.translation_id, practiced_word_pair.points_left]
             )
         self.__connection.commit()
 
@@ -101,7 +104,7 @@ class PractiseRepository:
         """Deletes all rows from table Practices."""
         cursor = self.__connection.cursor()
 
-        cursor.execute('DELETE FROM Practices')
+        cursor.execute('DELETE FROM Practice_progress')
 
         self.__connection.commit()
 

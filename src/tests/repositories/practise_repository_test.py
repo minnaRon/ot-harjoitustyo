@@ -1,13 +1,13 @@
 import unittest
-from entities.practise import Practice
+from entities.practise import PracticedWordPair
 from repositories.practise_repository import practise_repository
 
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
         practise_repository.delete_all()
-        practise_repository.create_practiced_pair(3, Practice('', '', 1, 2, 3, 5))
-        practise_repository.create_practiced_pair(3, Practice('', '', 2, 3, 3, 10))
-        practise_repository.create_practiced_pair(4, Practice('', '', 3, 4, 4, 15))
+        practise_repository.create_practiced_pair(3, PracticedWordPair('', '', 1, 2, 3, 5))
+        practise_repository.create_practiced_pair(3, PracticedWordPair('', '', 2, 3, 3, 10))
+        practise_repository.create_practiced_pair(4, PracticedWordPair('', '', 3, 4, 4, 15))
 
     def test_using_person_id_practised_pairs_are_found_from_database(self):
         practices = practise_repository.get_practices(3)
