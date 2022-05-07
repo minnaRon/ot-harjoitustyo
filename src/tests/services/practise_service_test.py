@@ -15,11 +15,11 @@ class TestPractiseService(unittest.TestCase):
     def setUp(self):
         self.service = PractiseService(FakePractiseRepository())
         self.service.set_words_to_practise('English', 'Finnish')
-        self.service._indexes_buttons_word_orig = [0, 1, 2, 3, 4]
+        self.service.indexes_buttons_word_orig = [0, 1, 2, 3, 4]
         self.service._indexes_buttons_word_transl = [1, 2, 3, 4, 5]
 
     def test_method_set_words_created_list_with_words(self):
-        self.assertTrue(self.service._words_chosen_to_practise)
+        self.assertTrue(self.service.words_chosen_to_practise)
 
     def test_when_words_are_pair_then_string_pari_in_response_variable(self):
         self.service._first_clicked_word_i = 2

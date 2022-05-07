@@ -5,12 +5,15 @@ from services.practise_service import (
 from services.user_service import (
     user_service as default_user_service
 )
-
+from services.practise_login_service import (
+    practise_login_service as default_practise_login_service
+)
 
 class PractiseView:
     def __init__(self, root, handle_main, handle_button_click,
                  practise_service=default_practise_service,
-                 user_service=default_user_service
+                 user_service=default_user_service,
+                 practise_login_service=default_practise_login_service
                  ):
         self.__root = root
         self.__frame = None
@@ -18,6 +21,7 @@ class PractiseView:
         self.__handle_button_click = handle_button_click
         self.__user_service = user_service
         self.__practise_service = practise_service
+        self.__practise_login_service = practise_login_service
         self.__words = None
         self.__button_word_index_orig = None
         self.__button_word_index_transl = None
@@ -43,13 +47,15 @@ class PractiseView:
         self.__frame.destroy()
 
     def __logout_handler(self):
-        self.__practise_service.save_points()
+        self.__practise_login_service.save_points(self.__words)
+        self.__practise_service._response = None
         self.__user_service.logout()
         self.__user = None
         self.__handle_main()
 
     def __practice_handler(self):
-        self.__practise_service.save_points()
+        self.__practise_login_service.save_points(self.__words)
+        self.__practise_service._response = None
         self.__handle_main()
 
     def _show_response(self, message):

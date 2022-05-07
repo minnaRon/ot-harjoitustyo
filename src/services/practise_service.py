@@ -5,44 +5,42 @@ from repositories.practise_repository import (
 from services.user_service import (
     user_service as default_user_service
 )
-
+from services.practise_login_service import (
+    practise_login_service as default_practise_login_service
+)
 class PractiseService:
     """Class takes care of practicing words with translations."""
 
     def __init__(self, practise_repository=default_practise_repository,
-            user_service=default_user_service
-        ):
+                user_service=default_user_service,
+                practise_login_service=default_practise_login_service
+                ):
         """Constructor
 
         Args:
             practise_repository (class):    Defaults to default_practise_repository.
             user_service (class):           Defaults to default_user_service.
+            practise_login_service (class): Defaults to default_practise_login_service
 
         Other object variables:
-            self._words_chosen_to_practise (list):      all pair of words chosen to practise
+            self.words_chosen_to_practise (list):      all pair of words chosen to practise
                                                         (index of pair of words concerns this list)
-            self._already_practised (dict):             pair of words which learning progress
-                                                        were already saved to the database.
-            self._indexes_buttons_word_orig (list):     indexes of pair of original words placed
+            self.indexes_buttons_word_orig (list):     indexes of pair of original words placed
                                                         to buttons user to see at present.
             self._indexes_buttons_word_transl (list):   indexes of pair of translation words placed
                                                         to buttons user to see at present.
             self._first_clicked_word_i (int):           holds index of first clicked pair of words.
-            self._user (object Person):                 holds person of user if logged in.
             self._response (string):                    holds message to show in practice_view.
-            self._counter (int):                        counts all clicks of buttons containing word
                                                         during training.
         """
         self._practise_repository = practise_repository
+        self._practise_login_service = practise_login_service
         self._user_service = user_service
-        self._words_chosen_to_practise = None
-        self._already_practised = None
-        self._indexes_buttons_word_orig = None
+        self.words_chosen_to_practise = None
+        self.indexes_buttons_word_orig = None
         self._indexes_buttons_word_transl = None
         self._first_clicked_word_i = None
-        self._user = None
         self._response = None
-        self._counter = 0
 
 
     def get_response(self):
@@ -50,11 +48,11 @@ class PractiseService:
 
 
     def get_words_to_practise(self):
-        return self._words_chosen_to_practise
+        return self.words_chosen_to_practise
 
 
     def get_word_orig_indexes(self):
-        return self._indexes_buttons_word_orig
+        return self.indexes_buttons_word_orig
 
 
     def get_word_transl_indexes(self):
@@ -67,15 +65,17 @@ class PractiseService:
             lang_orig (string):     original language
             lang_transl (string):   translation language
         """
-        self._user = self._user_service.get_current_user()
-        self._counter = 0
-        self._words_chosen_to_practise = (
+        user = self._user_service.get_current_user()
+        self.words_chosen_to_practise = (
             self._practise_repository.get_words_with_translations(lang_orig, lang_transl
         ))
-        if self._user:
-            self._prepare_chosen_words_including_progress()
+        if user:
+            self.words_chosen_to_practise = (
+                self._practise_login_service.prepare_chosen_words_including_progress(
+                    self.words_chosen_to_practise, self.indexes_buttons_word_orig
+                ))
 
-        if len(self._words_chosen_to_practise) > 5:
+        if len(self.words_chosen_to_practise) > 5:
             self._prepare_button_word_indexes()
 
         else:
@@ -85,8 +85,8 @@ class PractiseService:
 
     def _prepare_button_word_indexes(self):
         """Creates first lists for ui buttons containing word indexes"""
-        self._indexes_buttons_word_orig = [0, 1, 2, 3, 4]
-        self._indexes_buttons_word_transl = self._indexes_buttons_word_orig[:]
+        self.indexes_buttons_word_orig = [0, 1, 2, 3, 4]
+        self._indexes_buttons_word_transl = self.indexes_buttons_word_orig[:]
         shuffle(self._indexes_buttons_word_transl)
 
 
@@ -117,9 +117,9 @@ class PractiseService:
         Args:
             button_index (int):     index of button clicked
         """
-        word_index = self._indexes_buttons_word_orig[button_index]
+        word_index = self.indexes_buttons_word_orig[button_index]
         self._first_clicked_word_i = word_index
-        # lisaa kun muutkin variablet self._response = None
+        self._response = None
 
 
     def _get_word_i_of_button_word(self, button_index):
@@ -135,7 +135,6 @@ class PractiseService:
         Args:
             word_i (int):   second clicked button contained index of word
         """
-        self._user = self._user_service.get_current_user()
 
         if self._first_clicked_word_i == word_i:
             self._act_as_pair_correct(word_i)
@@ -144,7 +143,6 @@ class PractiseService:
             self._act_as_pair_not_correct(word_i)
 
         self._first_clicked_word_i = None
-        self._counter += 1
 
 
     def _act_as_pair_correct(self, word_i):
@@ -157,8 +155,10 @@ class PractiseService:
         Args:
             word_i (int):   index of word second clicked button contained
         """
-        if self._user:
-            self._subtract_points(word_i)
+        user = self._user_service.get_current_user()
+
+        if user:
+            self._practise_login_service.subtract_points(word_i)
 
         self._response = 'pari!'
         self._change_button_word_indexes(word_i)
@@ -173,19 +173,21 @@ class PractiseService:
         Args:
             learned_word_i (int):   index of learned word pair in chosen words
         """
-        self._user = self._user_service.get_current_user()
-        buttons_biggest_word_index_now = max(self._indexes_buttons_word_orig)
+        user = self._user_service.get_current_user()
+        buttons_biggest_word_index_now = max(self.indexes_buttons_word_orig)
 
         if self._words_to_practise_still_left(buttons_biggest_word_index_now):
 
             self._remove_learned_word_i_from_button_word_indexes(learned_word_i)
 
-            if self._user:
-                self._add_new_word_index_to_button_word_orig_indexes_depending_on_progress(
-                    buttons_biggest_word_index_now
-                    )
+            if user:
+                (
+                self._practise_login_service
+                    .add_new_word_index_to_button_word_orig_indexes_depending_on_progress(
+                        buttons_biggest_word_index_now, self.indexes_buttons_word_orig
+                    ))
             else:
-                self._indexes_buttons_word_orig.append((buttons_biggest_word_index_now +1))
+                self.indexes_buttons_word_orig.append((buttons_biggest_word_index_now +1))
 
             self._prepare_translation_word_indexes_for_buttons()
 
@@ -202,7 +204,7 @@ class PractiseService:
         Returns:
             boolean: True is still words left, else False
         """
-        return buttons_biggest_word_index_now < len(self._words_chosen_to_practise) - 5
+        return buttons_biggest_word_index_now < len(self.words_chosen_to_practise) - 5
 
 
     def _remove_learned_word_i_from_button_word_indexes(self, learned_word_i):
@@ -211,24 +213,11 @@ class PractiseService:
         Args:
             learned_word_i (int):   index of learned word in chosen words to practice
         """
-        self._indexes_buttons_word_orig.remove(learned_word_i)
-        self._indexes_buttons_word_transl.remove(learned_word_i)
-
-
-    def _add_new_word_index_to_button_word_orig_indexes_depending_on_progress(self, biggest_index):
-        """If user logged in adds index of new word to button depending of progress of learning.
-
-        Args:
-            biggest_index (int):    biggest index of word in buttons so far
-        """
-        biggest_i_with_points_left = self._check_next_i_with_points_left(biggest_index+1)
-        self._indexes_buttons_word_orig.append((biggest_i_with_points_left))
-        self._add_counter_reading_for_progress(biggest_index + 1)
-
+        self.indexes_buttons_word_orig.remove(learned_word_i)
 
     def _prepare_translation_word_indexes_for_buttons(self):
         """Sets list of indexes of words for translation buttons in ui"""
-        self._indexes_buttons_word_transl = self._indexes_buttons_word_orig[:]
+        self._indexes_buttons_word_transl = self.indexes_buttons_word_orig[:]
         shuffle(self._indexes_buttons_word_transl)
 
 
@@ -241,122 +230,11 @@ class PractiseService:
         Args:
             word_i (int):   index of word second clicked button contained
         """
-        if self._user:
-            self._add_points(word_i)
+        user = self._user_service.get_current_user()
+
+        if user:
+            self._practise_login_service.add_points(word_i)
 
         self._response = 'huti!'
-
-
-    def _check_next_i_with_points_left(self, next_i):
-        """If user is logged in returns next word index having still learning points to learn.
-
-        Args:
-            next_i (int): biggest index of word in buttons so far + 1
-
-        Returns:
-            int: next index of word to practice, if no more words to practice, returns -1
-        """
-        for i in range(next_i,len(self._words_chosen_to_practise)):
-
-            if self._words_chosen_to_practise[i].points_left > 0:
-                return i
-
-        return -1
-
-
-    def _prepare_chosen_words_including_progress(self):
-        """If logged in includes progress in pair of words and calls to remove already learned."""
-        self._user = self._user_service.get_current_user()
-        self._already_practised = self._practise_repository.get_practices(self._user.id)
-
-        self._remove_already_learned_words()
-
-        for pair in self._words_chosen_to_practise:
-
-            if pair.translation_id in self._already_practised.keys():
-                pair.id = self._already_practised[pair.translation_id].id
-                pair.person_id = self._already_practised[pair.translation_id].person_id
-                pair.points_left = self._already_practised[pair.translation_id].points_left
-                pair.new = False
-
-
-    def _remove_already_learned_words(self):
-        """If user is logged in removes already learned words from chosen words."""
-        already_learned = set()
-
-        for pair in self._words_chosen_to_practise:
-            if (pair.translation_id in self._already_practised.keys()
-                and self._already_practised[pair.translation_id].points_left == 0):
-
-                already_learned.add(pair)
-
-        self._words_chosen_to_practise = list(
-            filter(lambda pair : pair not in already_learned, self._words_chosen_to_practise)
-            )
-
-
-    def _subtract_points(self, word_i):
-        """If user is logged in updates learning progress to pair of words.
-
-        Correct pair of words subtracts learning points.
-
-        Args:
-            word_i (int):   index of pair of words in chosen words
-        """
-        practiced_pair = self._words_chosen_to_practise[word_i]
-        clicks_before_answer = self._counter - practiced_pair.counter_start
-
-        practiced_pair.points_left -= (5 - clicks_before_answer)
-
-        practiced_pair.points_left = max(0, practiced_pair.points_left)
-        practiced_pair.points_left = min(15, practiced_pair.points_left)
-
-
-    def _add_points(self, word_i):
-        """If user is logged in updates learning progress to pair of words.
-
-        Incorrect pair of words adds learning points.
-
-        Args:
-            word_i (int):   index of pair of words in chosen words
-        """
-        practiced_pair = self._words_chosen_to_practise[word_i]
-
-        practiced_pair.points_left += 5
-
-        practiced_pair.points_left = min(15, practiced_pair.points_left)
-
-
-    def _add_counter_reading_for_progress(self, word_i):
-        """Adds the start value of the counter to new pair of words to practise.
-
-        Args:
-            word_i (int):   index of pair of words in chosen words
-        """
-        practiced_pair = self._words_chosen_to_practise[word_i]
-        practiced_pair.counter_start = self._counter +1
-
-
-    def save_points(self):
-        """if user is logged in calls repository to save learning progress
-
-        If practised pair of words is new creates practiced pair with learning points
-        Else updates learning points of pair of words to database.
-        """
-        self._user = self._user_service.get_current_user()
-
-        if self._user:
-
-            for i in range(0, self._counter+5):
-
-                if self._words_chosen_to_practise[i].new:
-                    self._practise_repository.create_practiced_pair(
-                        self._user.id, self._words_chosen_to_practise[i]
-                        )
-
-                else:
-                    self._practise_repository.save_points(self._words_chosen_to_practise[i])
-
-        self._response = None
 
 practise_service = PractiseService()
