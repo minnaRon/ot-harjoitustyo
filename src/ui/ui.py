@@ -24,13 +24,6 @@ class UI:
             self.__current_view.destroy()
         self.__current_view = None
 
-
-    def handle_button_click(self, button_number):
-        self.__practise_service.check_word_pair(button_number - 1)
-        # poista vvv kun sanojen vaihto muuttujilla
-        self.__show_practise_view()
-
-
     def __handle_main(self):
         self.__show_main_view()
 
@@ -82,6 +75,6 @@ class UI:
     def __show_practise_view(self):
         self.__hide_current_view()
         self.__current_view = PractiseView(
-            self.__root, self.__handle_main, self.handle_button_click
+            self.__root, self.__handle_main
             )
         self.__current_view.pack()
