@@ -17,12 +17,13 @@ class PractiseLoginService:
             user_service (class):           Defaults to default_user_service.
 
         Other object variables:
-            self.words_chosen_to_practise (list):      all pair of words chosen to practise
+            self.words_chosen_to_practise (list):       all pair of words chosen to practise
                                                         (index of pair of words concerns this list)
             self._already_practised (dict):             pair of words which learning progress
                                                         were already saved to the database.
-            self.indexes_buttons_word_orig (list):     indexes of pair of original words placed
+            self.indexes_buttons_word_orig (list):      indexes of pair of original words placed
                                                         to buttons user to see at present.
+            self.already_learned (set):                 all learned pair of words.
             self._counter (int):                        counts all clicks of buttons containing word
                                                         during training.
         """
@@ -31,8 +32,11 @@ class PractiseLoginService:
         self.words_chosen_to_practise = None
         self.indexes_buttons_word_orig = None
         self._already_practised = None
+        self.already_learned = set()
         self._counter = 0
 
+    def get_already_learned(self):
+        return self.already_learned
 
     def prepare_chosen_words_including_progress(
         self, words_chosen_to_practise, indexes_buttons_word_orig
@@ -101,16 +105,16 @@ class PractiseLoginService:
 
     def _remove_already_learned_words(self):
         """Removes already learned words from chosen words."""
-        already_learned = set()
+        self.already_learned = set()
 
         for pair in self.words_chosen_to_practise:
             if (pair.translation_id in self._already_practised.keys()
                 and self._already_practised[pair.translation_id].points_left == 0):
 
-                already_learned.add(pair)
+                self.already_learned.add(pair)
 
         self.words_chosen_to_practise = list(
-            filter(lambda pair : pair not in already_learned, self.words_chosen_to_practise)
+            filter(lambda pair : pair not in self.already_learned, self.words_chosen_to_practise)
             )
 
 
@@ -118,6 +122,7 @@ class PractiseLoginService:
         """Updates learning progress to pair of words.
 
         Correct pair of words subtracts learning points.
+        Updates learned pairs if no learning points left.
 
         Args:
             word_i (int):   index of pair of words in chosen words
@@ -129,6 +134,9 @@ class PractiseLoginService:
 
         practiced_pair.points_left = max(0, practiced_pair.points_left)
         practiced_pair.points_left = min(15, practiced_pair.points_left)
+
+        if practiced_pair.points_left == 0:
+            self.already_learned.add(practiced_pair)
 
         self._counter += 1
 

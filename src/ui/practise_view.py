@@ -23,6 +23,8 @@ class PractiseView:
         
         self.__user_service = user_service
         self.__user = self.__user_service.get_current_user()
+        self.already_learned = None
+        self.learning_progress_variable = StringVar()
         self.__practise_service = practise_service
         self.__practise_login_service = practise_login_service
         
@@ -61,6 +63,7 @@ class PractiseView:
     def __logout_handler(self):
         self.__practise_login_service.save_points(self.__words)
         self.__practise_service._response = None
+        self.already_learned = None
         self.__user_service.logout()
         self.__user = None
         self.__handle_main()
@@ -69,6 +72,7 @@ class PractiseView:
     def __practice_handler(self):
         self.__practise_login_service.save_points(self.__words)
         self.__practise_service._response = None
+        self.already_learned = None
         self.__handle_main()
     
 
@@ -153,17 +157,23 @@ class PractiseView:
 
         for i in range(10):
             self.__word_buttons[i].grid(
-                row = i+2 if i < 5 else i-3,
+                row = i+4 if i < 5 else i-1,
                 column = 0 if i < 5 else 2,
                 sticky = 'e' if i < 5 else 'w'
                 )
 
 
     def _add_widgets_for_login_user(self):
+            self._set_learning_progress()
 
             self._label_username = ttk.Label(
             master=self.__frame,
-            text=f"Kirjautuneena {self.__user.name}"
+            text=f"{self.__user.name}"
+                )
+
+            self._label_progress = ttk.Label(
+            master=self.__frame,
+            textvariable=self.learning_progress_variable
                 )
 
             self._button_logout = ttk.Button(
@@ -173,14 +183,21 @@ class PractiseView:
                 )
 
 
+    def _set_learning_progress(self):
+        self.already_learned = self.__practise_login_service.get_already_learned()
+        count_already_learned = len(self.already_learned) if self.already_learned else 0
+        self.learning_progress_variable.set(f"kokonaan opitut {count_already_learned}")
+
+
     def _place_widgets(self):
         self._welcome_label.grid(row=0, column=0)
-        self._back_to_main_button.grid(row=1, column=0)
+        self._back_to_main_button.grid(row=0, column=2)
 
         if self.__user:
-            self._label_username.grid(row=0, column=2)
             self._button_logout.grid(row=1, column=2)
+            self._label_username.grid(row=1, column=0, sticky='w')
+            self._label_progress.grid(row=2, column=0, sticky='w')
 
         self._place_word_buttons()
 
-        self.__response_label.grid(row=7, column=0)
+        self.__response_label.grid(row=9, column=0)
