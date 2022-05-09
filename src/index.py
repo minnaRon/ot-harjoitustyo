@@ -6,6 +6,7 @@ def main():
 
     window = Tk()
     window.title("Sanastotreeni")
+    window.resizable(0,0)
 
     ui_view = UI(window)
     ui_view.start()
