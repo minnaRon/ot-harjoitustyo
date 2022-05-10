@@ -189,4 +189,9 @@ class PractiseLoginService:
                     self._practise_repository.save_points(self.words_chosen_to_practise[i])
 
 
+    def delete_all_progress(self):
+        user = self._user_service.get_current_user()
+        self._practise_repository.delete_progress(user)
+
+
 practise_login_service = PractiseLoginService()

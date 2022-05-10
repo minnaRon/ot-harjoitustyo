@@ -1,4 +1,5 @@
 from tkinter import ttk, constants, StringVar
+from tkinter.messagebox import askyesno
 from services.practise_service import (
     practise_service as default_practise_service
 )
@@ -78,8 +79,25 @@ class PractiseView:
 
     def __handle_word_button_click(self, button_number):
         self.__practise_service.check_word_pair(button_number - 1)
-        self.__initialize()
-    
+        self._set_word_buttons()
+        self._set_response()
+        self._set_learning_progress()
+
+
+    def __delete_this_session_progress_handler(self):
+        self.__practise_service.set_words_to_practise("English", "Finnish")
+        self._set_word_buttons()
+        self._set_response()
+        self._set_learning_progress()
+
+
+    def __delete_all_progress_handler(self):
+        self.__practise_login_service.delete_all_progress()
+        self.__practise_service.set_words_to_practise("English", "Finnish")
+        self._set_word_buttons()
+        self._set_response()
+        self._set_learning_progress()
+
 
     def __initialize(self):
         self._welcome_label = ttk.Label(
@@ -182,6 +200,24 @@ class PractiseView:
                 command=self.__logout_handler
                 )
 
+            self._button_delete_this_session_progress = ttk.Button(
+                master=self.__frame,
+                text="Nollaa tämän harjoittelukerran edistyminen",
+                command=self.__delete_this_session_progress_handler
+                )
+
+            self._button_delete_all_progress = ttk.Button(
+                master=self.__frame,
+                text="Nollaa kaikki tallennettu edistyminen",
+                command=self.confirm
+                )
+
+    def confirm(self):
+        message_ask = 'Olet poistamassa kaikki tiedot harjoittelusi edistymisestä, '
+        message_ask = message_ask +'haluatko varmasti poistaa edistymistiedot ja aloittaa alusta?'
+        answer = askyesno(title='HUOM! varmistus', message=message_ask)
+        if answer:
+            self.__delete_all_progress_handler()
 
     def _set_learning_progress(self):
         self.already_learned = self.__practise_login_service.get_already_learned()
@@ -190,14 +226,17 @@ class PractiseView:
 
 
     def _place_widgets(self):
-        self._welcome_label.grid(row=0, column=0)
-        self._back_to_main_button.grid(row=0, column=2)
+        self._welcome_label.grid(row=0, column=0, sticky='w')
+        self._back_to_main_button.grid(row=0, column=2, columnspan=2, sticky='e')
 
         if self.__user:
-            self._button_logout.grid(row=1, column=2)
+            self._button_logout.grid(row=1, column=2, sticky='e')
             self._label_username.grid(row=1, column=0, sticky='w')
             self._label_progress.grid(row=2, column=0, sticky='w')
+            self._button_delete_this_session_progress.grid(row=10, column=0, columnspan=2, sticky='w')
+            self._button_delete_all_progress.grid(row=11, column=0, columnspan=2, sticky='w')
 
         self._place_word_buttons()
 
         self.__response_label.grid(row=9, column=0)
+

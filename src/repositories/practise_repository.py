@@ -101,12 +101,27 @@ class PractiseRepository:
 
 
     def delete_all(self):
-        """Deletes all rows from table Practices."""
+        """Deletes all rows from table Practice_progress."""
         cursor = self.__connection.cursor()
 
         cursor.execute('DELETE FROM Practice_progress')
 
         self.__connection.commit()
 
+
+    def delete_progress(self, user):
+        """Deletes all rows from table Practice_progress where Person id belongs to user.
+
+        Args:
+            user (Person): current user
+        """
+        cursor = self.__connection.cursor()
+
+        cursor.execute('''DELETE
+                        FROM Practice_progress
+                        WHERE person_id=?
+                        ''', [user.id]
+                        )
+        self.__connection.commit()
 
 practise_repository = PractiseRepository(get_database_connection())

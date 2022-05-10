@@ -41,11 +41,10 @@ class RegisterView:
 
     def _show_error(self, message):
         self.__error_variable.set(message)
-        self.__error_label.grid(row=0, column=0)
+        self.__error_label.grid(row=0, column=0, columnspan=3, sticky='w')
 
     def _hide_error(self):
         self.__error_variable.set('')
-
         self.__error_label.grid_remove()
 
     def __initialize(self):
