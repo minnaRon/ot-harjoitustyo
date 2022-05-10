@@ -113,9 +113,11 @@ class RegisterView:
 
     def __check_correct_input(self, username, password1, password2):
         error_message = ""
+        if len(username) < 2 or len(username) > 20:
+            error_message += "tunnuksen pituuden tulee olla 2-20 merkkiä\n"
         if not username:
             error_message += "anna tunnus\n"
-        if password1 and password1 != password2:
+        if (password1 or password2) and password1 != password2:
             error_message += "salasanoissa oli eroa"
         if error_message:
             self._show_error(error_message)
