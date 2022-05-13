@@ -1,4 +1,5 @@
 from random import shuffle
+from entities.practise import PracticedWordPair
 from repositories.practise_repository import (
     practise_repository as default_practise_repository
 )
@@ -69,16 +70,19 @@ class PractiseService:
         self.words_chosen_to_practise = (
             self._practise_repository.get_words_with_translations(lang_orig, lang_transl
         ))
+        self.words_chosen_to_practise += [PracticedWordPair('*'*5, '*'*5, None) for i in range(7)]
+
         if user:
             self.words_chosen_to_practise = (
                 self._practise_login_service.prepare_chosen_words_including_progress(
                     self.words_chosen_to_practise, self.indexes_buttons_word_orig
                 ))
 
-        if len(self.words_chosen_to_practise) > 5:
+        if len(self.words_chosen_to_practise) > 7:
             self._prepare_button_word_indexes()
 
         else:
+            self._prepare_button_word_indexes()
             self._response = '''Harjoiteltavien sanojen määrä liian pieni,
                                 valitse lisää harjoiteltavia sanoja'''
 
@@ -99,16 +103,28 @@ class PractiseService:
         Args:
             button_index (int):     index of button clicked
         """
-        if self._first_clicked_word_i is None and button_index < 5:
-            self._set_first_selected_word_index(button_index)
+        buttons_biggest_word_index_now = max(self.indexes_buttons_word_orig)
 
-        elif self._first_clicked_word_i is not None and button_index >= 5:
-            second_clicked_word_index = self._get_word_i_of_button_word(button_index)
-            self._check_correctness_of_pair(second_clicked_word_index)
-
+        if self._words_to_practise_still_left(buttons_biggest_word_index_now) == 2:
+            self._response = 'HIENOA! Osasit kaikki sanat!'
         else:
-            self._first_clicked_word_i = None
-            self._response = 'valitse ensin yksi sana vasemmalta'
+            if self._get_word_i_of_button_word(button_index)<=len(self.words_chosen_to_practise)-4:
+
+                if button_index < 5:
+                    self._set_first_selected_word_index(button_index)
+
+                elif self._first_clicked_word_i is not None and button_index >= 5:
+                    second_clicked_word_index = self._get_word_i_of_button_word(button_index)
+                    self._check_correctness_of_pair(second_clicked_word_index)
+
+                else:
+                    self._first_clicked_word_i = None
+                    self._response = 'valitse ensin yksi sana vasemmalta'
+
+            else:
+                self._response = '''Harjoiteltavien sanojen määrä liian pieni,
+                                    valitse lisää harjoiteltavia sanoja'''
+
 
 
     def _set_first_selected_word_index(self, button_index):
@@ -176,23 +192,21 @@ class PractiseService:
         user = self._user_service.get_current_user()
         buttons_biggest_word_index_now = max(self.indexes_buttons_word_orig)
 
-        if self._words_to_practise_still_left(buttons_biggest_word_index_now):
+        if self._words_to_practise_still_left(buttons_biggest_word_index_now) == 3:
+            self._response = 'HIENOA! Osasit kaikki sanat!'
 
-            self._remove_learned_word_i_from_button_word_indexes(learned_word_i)
+        self._remove_learned_word_i_from_button_word_indexes(learned_word_i)
 
-            if user:
-                (
-                self._practise_login_service
-                    .add_new_word_index_to_button_word_orig_indexes_depending_on_progress(
-                        buttons_biggest_word_index_now, self.indexes_buttons_word_orig
-                    ))
-            else:
-                self.indexes_buttons_word_orig.append((buttons_biggest_word_index_now +1))
-
-            self._prepare_translation_word_indexes_for_buttons()
-
+        if user:
+            (
+            self._practise_login_service
+                .add_new_word_index_to_button_word_orig_indexes_depending_on_progress(
+                    buttons_biggest_word_index_now, self.indexes_buttons_word_orig
+                ))
         else:
-            self._response = 'HIENOA! Olet osannut kaikki sanat kerran!'
+            self.indexes_buttons_word_orig.append((buttons_biggest_word_index_now +1))
+
+        self._prepare_translation_word_indexes_for_buttons()
 
 
     def _words_to_practise_still_left(self, buttons_biggest_word_index_now):
@@ -204,7 +218,7 @@ class PractiseService:
         Returns:
             boolean: True is still words left, else False
         """
-        return buttons_biggest_word_index_now < len(self.words_chosen_to_practise) - 5
+        return len(self.words_chosen_to_practise) - (buttons_biggest_word_index_now + 1)
 
 
     def _remove_learned_word_i_from_button_word_indexes(self, learned_word_i):

@@ -35,8 +35,10 @@ class PractiseLoginService:
         self.already_learned = set()
         self._counter = 0
 
+
     def get_already_learned(self):
         return self.already_learned
+
 
     def prepare_chosen_words_including_progress(
         self, words_chosen_to_practise, indexes_buttons_word_orig
@@ -71,6 +73,7 @@ class PractiseLoginService:
 
         return self.words_chosen_to_practise
 
+
     def add_new_word_index_to_button_word_orig_indexes_depending_on_progress(
         self, biggest_index, indexes_buttons_word_orig
         ):
@@ -95,10 +98,13 @@ class PractiseLoginService:
         Returns:
             int: next index of word to practice, if no more words to practice, returns -1
         """
-        for i in range(next_i,len(self.words_chosen_to_practise)):
-
-            if self.words_chosen_to_practise[i].points_left > 0:
+        for i in range(next_i,len(self.words_chosen_to_practise)-7):
+            if (self.words_chosen_to_practise[i].points_left > 0
+                    and i not in self.indexes_buttons_word_orig):
                 return i
+
+        if len(self.words_chosen_to_practise) > len(self.already_learned)+12:
+            self._check_next_i_with_points_left(0)
 
         return -1
 
@@ -138,7 +144,8 @@ class PractiseLoginService:
         if practiced_pair.points_left == 0:
             self.already_learned.add(practiced_pair)
 
-        self._counter += 1
+        if word_i < len(self.words_chosen_to_practise) -7:
+            self._counter += 1
 
 
     def add_points(self, word_i):
@@ -155,7 +162,8 @@ class PractiseLoginService:
 
         practiced_pair.points_left = min(15, practiced_pair.points_left)
 
-        self._counter += 1
+        if word_i < len(self.words_chosen_to_practise) -7:
+            self._counter += 1
 
 
     def _add_counter_reading_for_progress(self, word_i):
@@ -177,14 +185,13 @@ class PractiseLoginService:
         user = self._user_service.get_current_user()
         self.words_chosen_to_practise = words
         if user:
-
-            for i in range(0, self._counter+5):
-
-                if self.words_chosen_to_practise[i].new:
+            end = min(self._counter + 5, len(self.words_chosen_to_practise))
+            for i in range(0, end):
+                if (self.words_chosen_to_practise[i].new
+                    and self.words_chosen_to_practise[i].translation_id):
                     self._practise_repository.create_practiced_pair(
                         user.id, self.words_chosen_to_practise[i]
                         )
-
                 else:
                     self._practise_repository.save_points(self.words_chosen_to_practise[i])
 
