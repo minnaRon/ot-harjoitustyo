@@ -17,8 +17,7 @@ class PractiseView:
                  practise_login_service=default_practise_login_service
                  ):
         self.__root = root
-        self.__frame = ttk.Frame(master=self.__root)
-        self.__frame['padding'] = (5, 5, 5, 10)        
+        self.__frame = ttk.Frame(master=self.__root, padding=30)
         
         self.__handle_main = handle_main
         
@@ -102,7 +101,9 @@ class PractiseView:
     def __initialize(self):
         self._welcome_label = ttk.Label(
             master=self.__frame,
-            text="Tervetuloa sanastotreeniin!"
+            text="Sanastotreeni, valitse sanaparit",
+            foreground='green',
+            font=('default', 12, 'bold')
         )
 
         if self.__user:
@@ -123,7 +124,7 @@ class PractiseView:
 
     def _set_response(self):
         self._check_response()
-        self._create_response_button()
+        self._create_response_label()
 
 
     def _check_response(self):
@@ -134,7 +135,7 @@ class PractiseView:
             self.__response_variable.set("")
 
 
-    def _create_response_button(self):
+    def _create_response_label(self):
         self.__response_label = ttk.Label(
             master=self.__frame,
             textvariable=self.__response_variable,
@@ -152,7 +153,6 @@ class PractiseView:
 
 
     def _set_words_to_buttons(self):
-
         for i, word_pair_i in enumerate(self.__button_word_index_orig, start=1):
             self.__button_vars[i].set(self.__words[word_pair_i].word_orig)
 
@@ -161,13 +161,13 @@ class PractiseView:
 
 
     def __create_word_buttons(self):
-
         for i in range(1,11):
             self.__word_buttons.append( 
             ttk.Button(
             master=self.__frame,
             textvariable=self.__button_vars[i],
-            command=self.__button_commands[i]
+            command=self.__button_commands[i],
+            style='words.TButton'
         ))
 
 
@@ -176,7 +176,8 @@ class PractiseView:
         for i in range(10):
             self.__word_buttons[i].grid(
                 row = i+4 if i < 5 else i-1,
-                column = 0 if i < 5 else 2,
+                column = 0 if i < 5 else 1,
+                padx=10, pady=5,
                 sticky = 'e' if i < 5 else 'w'
                 )
 
@@ -186,7 +187,7 @@ class PractiseView:
 
             self._label_username = ttk.Label(
             master=self.__frame,
-            text=f"{self.__user.name}"
+            text=f"Kirjautuneena {self.__user.name}"
                 )
 
             self._label_progress = ttk.Label(
@@ -226,17 +227,17 @@ class PractiseView:
 
 
     def _place_widgets(self):
-        self._welcome_label.grid(row=0, column=0, sticky='w')
-        self._back_to_main_button.grid(row=0, column=2, columnspan=2, sticky='e')
+        self._welcome_label.grid(row=0, column=0, sticky='w', pady=30)
+        self._back_to_main_button.grid(row=0, column=2, sticky='e')
 
         if self.__user:
             self._button_logout.grid(row=1, column=2, sticky='e')
             self._label_username.grid(row=1, column=0, sticky='w')
             self._label_progress.grid(row=2, column=0, sticky='w')
-            self._button_delete_this_session_progress.grid(row=10, column=0, columnspan=2, sticky='w')
-            self._button_delete_all_progress.grid(row=11, column=0, columnspan=2, sticky='w')
+            self._button_delete_this_session_progress.grid(row=10, column=0, pady=5, columnspan=2, sticky='w')
+            self._button_delete_all_progress.grid(row=11, column=0, pady=5, columnspan=2, sticky='w')
 
         self._place_word_buttons()
 
-        self.__response_label.grid(row=9, column=0)
+        self.__response_label.grid(row=9, column=1)
 

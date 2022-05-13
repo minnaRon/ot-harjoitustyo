@@ -1,4 +1,4 @@
-from tkinter import Tk
+from tkinter import ttk
 from services.practise_service import (
     practise_service as default_practise_service
 )
@@ -16,13 +16,22 @@ class UI:
 
 
     def start(self):
+        self._configure_style()
         self.__show_main_view()
+
+
+    def _configure_style(self):
+        newT = ttk.Style()
+        newT.configure('TButton', background='#E0E0E0', foreground='green', padding=5, borderwidth=3, relief='raised')
+        newT.configure('TLabel', foreground='green')
+        newT.configure('words.TButton', foreground='#2B847E')
 
 
     def __hide_current_view(self):
         if self.__current_view:
             self.__current_view.destroy()
         self.__current_view = None
+
 
     def __handle_main(self):
         self.__show_main_view()

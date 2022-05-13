@@ -49,7 +49,7 @@ class AddWordsView:
 
 
     def _add_frame1(self):
-        self.__frame1 = ttk.Frame(master=self._root)
+        self.__frame1 = ttk.Frame(master=self._root, padding=(0,30,30,30))
         label_headline = ttk.Label(master=self.__frame1, text="LISÄÄ SANOJA")
 
         self._create_message_button()
@@ -90,7 +90,7 @@ class AddWordsView:
 
 
     def _add_frame2(self):
-        self.__frame2 = ttk.Frame(master=self._root, width=80)
+        self.__frame2 = ttk.Frame(master=self._root, padding=(30,0,30,30), width=80)
 
         self.textarea_words_orig = Text(master=self.__frame2, height=25, width=40)
         self.textarea_words_transl = Text(master=self.__frame2, height=25, width=40)
@@ -109,11 +109,11 @@ class AddWordsView:
 
 
     def create_option_menus(self):
-        self.option_var_orig = tk.StringVar(self.__frame2)
-        self.option_var_transl = tk.StringVar(self.__frame2)
+        self.option_var_orig = tk.StringVar(self.__frame1)
+        self.option_var_transl = tk.StringVar(self.__frame1)
 
         self.label_orig = ttk.Label(master=self.__frame1,
-                                    text='valitse käännettävä kieli')
+                                    text='     valitse käännettävä kieli')
 
         self.label_orig.grid(row=5, column=0, sticky='w')
         self.option_menu_orig = ttk.OptionMenu(
