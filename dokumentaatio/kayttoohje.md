@@ -83,8 +83,15 @@ Päänäkymästä voi siirtyä harjoittelunäkymään painamalla HARJOITTELE -pa
 - tämän jälkeen sovellus kertoo näkymään ilmestyvällä viestillä:
     - jos sanat vastaavat toisiaan, ilmestyy näkymään viesti pari! 
     - jos sanat eivät vastaa toisiaan, ilmestyy näkymään viesti huti!
+    - opittujen sanaparien lukumäärä näkyy vasemmalla kohdassa kokonaan opitut
+        - näitä sanoja ei tuoda enää harjoiteltavaksi
 
 **harjoittelun lopuksi**
+- harjoittelun edistymisen voi resetoida
+    - painamalla painiketta 'nollaa tämän harjoittelukerran edistyminen'
+        - poistaa vain kyseisen harjoittelukerran edistymisen
+    - painamalla painiketta 'nollaa kaikki tallennettu edistyminen'
+        - poistaa kaikki kirjautuneen käyttäjän harjoittelutiedot myös tietokannasta
 - takaisin päävalikkoon pääsee painamalla ‘takaisin päävalikkoon’ -painiketta.
 - kirjautuminen ulos painamalla 'kirjaudu ulos' -painiketta vie takaisin päävalikkoon
 kirjaten käyttäjän samalla ulos sovelluksesta.
