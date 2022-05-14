@@ -18,4 +18,10 @@
 |  1.5. | 7    | 'kirjaudu ulos' ja 'takaisin päävalikkoon' -painikkeita näkymiin, refaktorointia PractiseService -luokkaan, testejä |
 |  2.5. | 5    | docstringeja repository, services ja entiteettiluokkiin |
 |  3.5. | 8    | käyttöohje, pakkaus- ja luokkakaavioita, docstringeja, dokumentaation päivitystä, release, toimivuuden tarkistus |
-| yht   | 85   | |
+|  7.5. | 8    | PractiseService -luokan jako kahdeksi luokaksi ym. refaktorointia, StringVariablet käyttöön sanapainikkeille |
+|  8.5. | 2    | sanastonäkymän rakenteen parantelua, refaktorointia |
+|  9.5. | 8    | harjoittelun edistyminen näkyviin ja resetointimahdollisuudet harjoittelunäkymään |
+| 12.5. | 8    | näkymien stailausta ja järjestelyä |
+| 13.5. | 4    | käyttöohjeen päivitys uusilla kuvilla, sanaston viimeisten sanojen käsittely |
+| 14.5. | 10   | testejä, testausdokumentti, release, dokumenttien päivitys, toimivuuden tarkistus |
+| yht.  | 125  | |
