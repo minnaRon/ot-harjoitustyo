@@ -18,9 +18,11 @@ Sovelluksen sujuvan toiminnan kannalta Python -version tulisi olla vähintään 
 
 [changelog](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
-[uusin release](https://github.com/minnaRon/ot-harjoitustyo/releases/tag/viikko6)
+[uusin release](https://github.com/minnaRon/ot-harjoitustyo/releases/tag/loppupalautus)
 
 [käyttöohje](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
+[testaus](https://github.com/minnaRon/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
 
 ## Asennus
 
