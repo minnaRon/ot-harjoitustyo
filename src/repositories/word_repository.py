@@ -1,5 +1,5 @@
 from database_connection import get_database_connection
-
+from entities.word import Word
 
 class WordRepository:
     """Class takes care of database operations concerning word operations."""
@@ -12,7 +12,7 @@ class WordRepository:
         self.__connection = connection
 
 
-    def _add_word_returning_id(self, word, lang):
+    def _add_word_returning_id(self, word):
         """Creates new word in database and returns rowid of the word.
 
         Args:
@@ -27,7 +27,7 @@ class WordRepository:
         sql = '''INSERT INTO Words (word, language)
             VALUES (:word, :lang)
             '''
-        dictionary = {'word': word, 'lang': lang}
+        dictionary = {'word': word.word, 'lang': word.language}
         cursor.execute(sql, dictionary)
 
         self.__connection.commit()
@@ -35,7 +35,7 @@ class WordRepository:
         return cursor.lastrowid
 
 
-    def add_pair_word_and_translation(self, word_orig, lang_orig, word_transl, lang_transl) -> int:
+    def add_pair_word_and_translation(self, word_orig, word_transl) -> int:
         """Adds pair of words in the database and returns rowid of the pair.
 
         Args:
@@ -47,14 +47,14 @@ class WordRepository:
         Returns:
             int: rowid of the pair of words
         """
-        word_orig_id = self._get_word_id(word_orig, lang_orig)
+        word_orig_id = self._get_word_id(word_orig)
         if not word_orig_id:
-            word_orig_id = self._add_word_returning_id(word_orig, lang_orig)
+            word_orig_id = self._add_word_returning_id(word_orig)
 
-        word_transl_id = self._get_word_id(word_transl, lang_transl)
+        word_transl_id = self._get_word_id(word_transl)
         if not word_transl_id:
             word_transl_id = self._add_word_returning_id(
-                word_transl, lang_transl)
+                word_transl)
 
         word_pair_id = self._get_word_pair(word_orig_id, word_transl_id)
 
@@ -110,11 +110,12 @@ class WordRepository:
             for row in file_words:
                 parts = row.strip().split(";")
                 word_orig, word_transl = parts
-                self.add_pair_word_and_translation(
-                    word_orig, "English", word_transl, "Finnish")
+                word_orig = Word(word_orig, "English")
+                word_transl = Word(word_transl, "Finnish")
+                self.add_pair_word_and_translation(word_orig, word_transl)
 
 
-    def _get_word_id(self, word, lang):
+    def _get_word_id(self, word):
         """Returns id of the word
 
         Args:
@@ -129,10 +130,19 @@ class WordRepository:
         cursor.execute('''
             SELECT id FROM Words
             WHERE word=? AND language=?
-        ''', [word, lang]
+        ''', [word.word, word.language]
         )
         result = cursor.fetchone()
         return result[0] if result else result
+
+
+    def delete_all(self):
+        """Deletes all rows from table Word_pairs and from table Words."""
+        cursor = self.__connection.cursor()
+        cursor.execute('DELETE FROM Word_pairs')
+        cursor.execute('DELETE FROM Words')
+
+        self.__connection.commit()
 
 
 word_repository = WordRepository(get_database_connection())

@@ -197,6 +197,7 @@ class PractiseLoginService:
 
 
     def delete_all_progress(self):
+        """Deletes all progress saved regarding current user"""
         user = self._user_service.get_current_user()
         self._practise_repository.delete_progress(user)
 

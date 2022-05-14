@@ -71,7 +71,7 @@ class AddWordsView:
             command=lambda: self.__save_words()
         )
 
-        self.create_option_menus()
+        self._create_option_menus()
 
         label_headline.grid(row=0, column=3)
 
@@ -108,7 +108,7 @@ class AddWordsView:
         )
 
 
-    def create_option_menus(self):
+    def _create_option_menus(self):
         self.option_var_orig = tk.StringVar(self.__frame1)
         self.option_var_transl = tk.StringVar(self.__frame1)
 
@@ -121,7 +121,7 @@ class AddWordsView:
                                             self.option_var_orig,
                                             self.lang_options[0],
                                             *self.lang_options,
-                                            command=self.option_changed_orig
+                                            command=self._option_changed_orig
         )
         self.label_transl = ttk.Label(master=self.__frame1,
                                         text='valitse käännöksen kieli')
@@ -132,16 +132,16 @@ class AddWordsView:
                                             self.option_var_transl,
                                             self.lang_options[0],
                                             *self.lang_options,
-                                            command=self.option_changed_transl
+                                            command=self._option_changed_transl
         )
         self._hide_message()
 
 
-    def option_changed_orig(self, lang_orig='suomi'):
+    def _option_changed_orig(self, lang_orig='suomi'):
         self.lang_orig = lang_orig
 
 
-    def option_changed_transl(self, lang_transl='englanti'):
+    def _option_changed_transl(self, lang_transl='englanti'):
         self.lang_transl = lang_transl
 
 

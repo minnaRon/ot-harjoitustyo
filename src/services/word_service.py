@@ -1,6 +1,7 @@
 from repositories.word_repository import (
     word_repository as default_word_repository
 )
+from entities.word import Word
 
 
 class WordAddingError(Exception):
@@ -23,6 +24,7 @@ class WordService:
         self._word_repository = word_repository
         self._languages = {'suomi': 'Finnish', 'englanti': 'English'}
 
+
     def _add_words(self, words_orig, lang_orig, words_transl, lang_transl):
         """Handles user input regarding list of words and translations.
 
@@ -40,11 +42,12 @@ class WordService:
 
         for i, word_orig in enumerate(words_orig, start=0):
             self.add_word_with_translation(
-                word_orig, self._languages[lang_orig],
-                words_transl[i], self._languages[lang_transl]
+                Word(word_orig, self._languages[lang_orig]),
+                Word(words_transl[i], self._languages[lang_transl])
             )
 
-    def add_word_with_translation(self, word_orig, lang_orig, word_transl, lang_transl):
+
+    def add_word_with_translation(self, word_orig, word_transl):
         """Calls word_repository to add a word and a translation to the database.
 
         Args:
@@ -58,7 +61,7 @@ class WordService:
         """
         try:
             self._word_repository.add_pair_word_and_translation(
-                word_orig, lang_orig, word_transl, lang_transl
+                word_orig, word_transl
             )
         except:
             raise WordAddingError(

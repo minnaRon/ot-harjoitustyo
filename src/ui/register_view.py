@@ -111,7 +111,7 @@ class RegisterView:
         label_password1.grid(row=3, column=0)
         self.__entry_password1.grid(row=3, column=1, padx=5, pady=5, sticky='e')
         label_password2.grid(row=4, column=0)
-        self.__entry_password2.grid(row=4, column=1, padx=5, pady=5)
+        self.__entry_password2.grid(row=4, column=1, padx=5, pady=5, sticky='e')
         button_login.grid(row=5, column=1, padx=5, pady=15, sticky='e')
 
         self._hide_error()
