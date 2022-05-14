@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa projektin viimeisimmän [releasen](https://github.com/minnaRon/ot-harjoitustyo/releases/tag/viikko6) lähdekoodi valitsemalla Assets -osion alta Source code.
+Lataa projektin viimeisimmän [releasen](https://github.com/minnaRon/ot-harjoitustyo/releases/tag/loppupalautus) lähdekoodi valitsemalla Assets -osion alta Source code.
 
 ### Ohjelman käynnistäminen:
 
@@ -87,6 +87,10 @@ Päänäkymästä voi siirtyä harjoittelunäkymään painamalla HARJOITTELE -pa
     - jos sanat eivät vastaa toisiaan, ilmestyy näkymään viesti huti!
     - opittujen sanaparien lukumäärä näkyy vasemmalla kohdassa kokonaan opitut
         - näitä sanoja ei tuoda enää harjoiteltavaksi
+
+Vinkki: valitse aina mielestäsi helpoin sanapari, niin kertaat vaikeampia useammin.
+Vasemman alakulman sana kirjautuu ensimmäisellä osaamiskerralla osatuksi ja 
+poistuu harjoiteltavista, pääset näin itsellesi helpoista sanoista heti eroon.
 
 **harjoittelun lopuksi**
 - harjoittelun edistymisen voi resetoida
