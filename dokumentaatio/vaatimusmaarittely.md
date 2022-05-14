@@ -20,9 +20,9 @@ Sovelluksessa on viisi näkymää
 
 ![](./kuvat/ui_views.jpg)
 
-**Sovellus aukeaa päänäkymään**, josta voi siirtyä kirjautumisnäkymään, rekisteröitymisnäkymään tai sanaston harjoittelu -näkymään.  
-Kirjautumisen jälkeen käyttäjä siirretään päänäkymään, josta kirjautunut käyttäjä voi siirtyä sanaston harjoittelu -näkymään tai sanaston lisäys -näkymään. 
-Päänäkymästä, sanaston harjoittelu -näkymästä ja sanaston lisäys -näkymästä voi sovelluksesta kirjautua ulos, jolloin käyttäjä siirretään päänäkymään.
+**Sovellus aukeaa päänäkymään**, josta voi siirtyä kirjautumisnäkymään, rekisteröitymisnäkymään tai sanaston harjoittelu -näkymään.   
+Kirjautumisen jälkeen käyttäjä siirretään päänäkymään, josta kirjautunut käyttäjä voi siirtyä sanaston harjoittelu -näkymään tai sanaston lisäys -näkymään. Jokaisesta näkymästä voi siirtyä takaisin päänäkymään.
+Päänäkymästä ja sanaston harjoittelu -näkymästä voi sovelluksesta kirjautua ulos, jolloin käyttäjä siirretään päänäkymään.
 
 ## Perusversion toiminnallisuus
 
