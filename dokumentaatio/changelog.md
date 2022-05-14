@@ -50,3 +50,14 @@
 - Lisätty tiedostoon arkkitehtuuri.md pakkauskaavio, pakkaus- ja luokkakaavio sekä loogisen tietomallin kaavio
 - Lisätty tiedosto kayttoohje.md
 
+## Viikko 5
+
+- Harjoittelunäkymässä näkyy kirjautuneen käyttäjän harjoittelun edistyminen
+- Harjoittelunäkymässä voi kirjautunut käyttäjä resetoida edistymisensä sen hetkisen harjoittelukerran osalta tai poistaa kaiken tallennetun edistymisen myös tietokannasta
+- Lisätty sanapainikkeille sanojen vaihtuminen tkinterin StringVar -muuttujien kautta
+- Siirretty PractiseService -luokasta kirjautuneen käyttäjän logiikka PractiseLoginService -luokkaan
+- Lisätty style-konfigurointi UI -luokkaan ja näkymäluokkiin näkymien layout
+- Vaihdettu uuden layoutin mukaiset kuvat kayttoohje.md -tiedostoon
+- Lisätty tunnuksen validointi 2-20 merkin pituiseksi
+- Lisätty testejä ja testiluokat TestPractiseLoginService, TestMultiClass
+- Lisätty testaus.md
