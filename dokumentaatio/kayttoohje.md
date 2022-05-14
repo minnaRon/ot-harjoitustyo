@@ -1,5 +1,7 @@
 # Käyttöohje
 
+Lataa projektin viimeisimmän [releasen](https://github.com/minnaRon/ot-harjoitustyo/releases/tag/viikko6) lähdekoodi valitsemalla Assets -osion alta Source code.
+
 ### Ohjelman käynnistäminen:
 
 Ennen käynnistämistä, asenna riippuvuudet komennolla:
