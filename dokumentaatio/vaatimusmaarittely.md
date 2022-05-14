@@ -30,11 +30,11 @@ Päänäkymästä, sanaston harjoittelu -näkymästä ja sanaston lisäys -näky
 
 **Käyttäjä voi**
 - harjoitella sanastoa ilman edistymisen tallentamista (tehty)
-- rekisteröityä sovelluksen käyttäjäksi luomalla tunnuksen ja halutessaan myös salasanan
-    - tunnuksen pituuden tulee olla 2 - 20 merkkiä ja sen tulee olla uniikki
+- rekisteröityä sovelluksen käyttäjäksi luomalla tunnuksen ja halutessaan myös salasanan (tehty)
+    - tunnuksen pituuden tulee olla 2 - 20 merkkiä ja sen tulee olla uniikki (tehty)
     - salasana ei ole pakollinen (tehty)
     - mikäli salasana on annettu, se vaaditaan käyttäjän kirjautuessa (tehty)
-- kirjautua sovellukseen 
+- kirjautua sovellukseen (tehty)
     - kirjoittamalla luomansa tunnuksen ja mahdollisen salasanan kirjautumislomakkeelle (tehty)
     - jos käyttäjän syöttämää tunnusta ei löydy tai salasana on virheellinen, ilmoitetaan se käyttäjälle (tehty)
 
@@ -43,9 +43,9 @@ Päänäkymästä, sanaston harjoittelu -näkymästä ja sanaston lisäys -näky
 **Käyttäjä voi**
 - lisätä sanoja sanastoon (tehty)
 - harjoitella sanaston sanoja (tehty)
-- seurata edistymistään sanojen oppimisessa lukumäärätasolla
+- seurata edistymistään sanojen oppimisessa lukumäärätasolla (tehty)
 - tallentaa harjoittelun edistymisen (tehty)
-- resetoida tallennetun edistymisen ja harjoitella uudelleen
+- resetoida tallennetun edistymisen ja harjoitella uudelleen (tehty)
 - kirjautua ulos sovelluksesta (tehty)
 
 ### Jatkokehitysideoita
