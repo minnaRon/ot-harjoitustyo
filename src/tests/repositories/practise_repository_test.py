@@ -2,7 +2,7 @@ import unittest
 from entities.practise import PracticedWordPair
 from repositories.practise_repository import practise_repository
 
-class TestUserRepository(unittest.TestCase):
+class TestPractiseRepository(unittest.TestCase):
     def setUp(self):
         practise_repository.delete_all()
         practise_repository.create_practiced_pair(3, PracticedWordPair('', '', 1, 2, 3, 5))
